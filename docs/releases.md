@@ -11,7 +11,7 @@ supported script interfaces, required tooling, and the behaviour of installed
 instructions. Additive capabilities or guidance use `feat`; corrections use
 `fix`; incompatible removals or requirements use a breaking marker and explain
 the migration. README-only explanation can use `docs`. A breaking change during
-`0.x` advances to `1.0.0`, following the existing CypherDown policy.
+`0.x` advances to `1.0.0` under this repository’s release policy.
 
 ## Preview and validation
 

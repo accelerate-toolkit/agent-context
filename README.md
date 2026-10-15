@@ -51,6 +51,11 @@ organization workflows.
 
 ## Onboard Dependency Updates
 
+For a new GitHub repository, follow the complete
+[APM and Renovate onboarding checklist](packages/org-meta-bundle/.apm/instructions/apm-updates.instructions.md#new-github-repository-checklist).
+It covers local setup, frozen locks, advisory hooks, runner credentials and
+verification of an actual update PR/merge. Prepared files alone are not live onboarding.
+
 Inspect existing Renovate configuration and runner setup. Projects should extend
 their organization's published preset; when none exists, add this baseline to
 `renovate.json`:
@@ -169,7 +174,7 @@ environment conventions.
 ## Releases and Dependency Updates
 
 Use Conventional Commits and Semantic Versioning for released artifacts. This
-repository follows CypherDown's automatic release model: eligible commits on
+repository uses an automatic release model: eligible commits on
 `main` produce a tested, immutable release with synchronized package metadata.
 Skills and instructions are shipped functionality, so classify their changes by
 consumer impact rather than automatically using `docs` for Markdown.

@@ -27,21 +27,21 @@ Codex receives skills under `.agents/skills/`. It receives agents under `.codex/
 Use a local package when its workflows, terminology, or tools only make sense
 in one repository. Local `path:` dependencies MUST live below the repository
 root that owns the declaring `apm.yml`; use a repository-relative path such as
-`./local-apm-packages/second-brain-workflows`.
+`./local-apm-packages/project-workflows`.
 
 Do not use `../` paths, absolute paths, or paths into sibling repositories.
 APM may support those forms, but they make a workspace depend on a machine-local
 checkout. Put cross-repository workflows in a remote Git or marketplace package
 instead.
 
-For example, `second-brain` can keep its context-specific package inside that
+For example, `example-project` can keep its context-specific package inside that
 repository and declare it as a regular dependency in its root `apm.yml` when
 every contributor needs its workflows:
 
 ```yaml
 dependencies:
   apm:
-    - path: ./local-apm-packages/second-brain-workflows
+    - path: ./local-apm-packages/project-workflows
 ```
 
 Use `devDependencies.apm` only for maintainer-only content, such as test

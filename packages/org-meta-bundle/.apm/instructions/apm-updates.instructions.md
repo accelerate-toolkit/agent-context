@@ -36,6 +36,61 @@ lockfiles, installed skills, or APM bootstrap steps. A preset may describe APM
 update rules without depending on APM. Tooling needed to refresh consumer
 lockfiles belongs in the consumer update runner.
 
+## Public repository portability
+
+Keep shared modules, skills and instructions independent of private consumer
+organizations. Use fictional names, example domains/mailboxes and placeholder
+account IDs in examples. Do not carry consumer project names, private repository
+links, local filesystem paths or deployment settings into public guidance.
+Deployment-specific values belong in ignored local configuration or private
+consumer repositories. Public package/preset coordinates and copyright notices
+remain legitimate attribution; do not remove those as part of sanitizing examples.
+Audit publication candidates as well as staged content, and distinguish this check
+from an audit or rewrite of previously published Git history.
+
+## New GitHub repository checklist
+
+Onboard ordinary project repositories with both APM and Renovate. The Renovate
+configuration-repository exception above still applies. Start by inspecting the
+existing Makefile, agent instructions, APM manifests/lock, dependency configuration,
+workflows, hooks and GitHub settings; preserve working integrations.
+
+1. Add repository-specific `.apm/instructions/` and an `apm.yml` targeting the
+   supported agent, with the published organization package pinned to a real
+   release. Do not invent a tag or use a sibling-checkout path for shared skills.
+   Preview installation, resolve the first lock, then compile instructions. Commit
+   the manifest, lock and compiled instructions; ignore downloaded packages, tool
+   caches and generated deployments. Do not introduce ontologies unless requested.
+2. Expose setup/install, deliberate update, compilation and relevant local checks
+   through documented Make targets. Normal setup uses the frozen lock; dependency
+   updates are a separate reviewed operation. Install the advisory hooks described
+   below without replacing existing hooks. Keep private deployment config, state,
+   credentials and test artifacts ignored, with fictional public examples.
+3. Extend the existing organization/shared Renovate preset. Configure a working
+   runner or verify an existing GitHub App/shared runner; a preset alone is not
+   execution. Pin runner tools, provide APM for lock regeneration, and include
+   managers for all relevant dependency inputs. Check extraction, especially when
+   inherited ignore rules exclude examples that are executable test deployments.
+4. Apply the agreed automerge/check policy explicitly. Automerge may include major
+   updates, but respect required checks; do not copy `ignoreTests: true` from a repo
+   with no checks into a module that has checks. Dependency updates do not authorize
+   infrastructure deployment. Keep module checks credential-free; cloud acceptance
+   tests need their own explicitly authorized workflow.
+5. Configure narrowly scoped GitHub-only bot access. Use repository secrets when
+   organizational secrets are unavailable under the GitHub plan. Never expose
+   token values in files, logs or messages; keep scope/expiry/rotation notes private.
+   Do not add AWS credentials or deployment access to a dependency runner.
+6. Validate locally, then distinguish prepared configuration from live onboarding.
+   Confirm publication, runner authentication/extraction and a real dependency PR
+   and expected merge before claiming completion. Record pending external steps.
+   Repository publication/commits and messaging still follow the user's existing
+   authorization; onboarding does not silently authorize exposing private content.
+
+For changes to this shared guidance, update its source package and compile the
+repository instructions. Existing consumers stay on their published package pin
+until a new immutable release is available; do not point them at an unpublished
+version or claim that editing this checkout updated all consumers.
+
 ## APM dependencies
 
 Pin remote APM packages to explicit release versions, for example
