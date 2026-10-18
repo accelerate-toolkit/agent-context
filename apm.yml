@@ -1,7 +1,7 @@
 name: agent-context
 version: 0.5.0
-description: Codex-first APM packages for leverage-works.
-author: leverage-works
+description: Codex-first APM packages for accelerate-toolkit.
+author: accelerate-toolkit
 license: MIT
 targets:
   - codex
@@ -13,8 +13,8 @@ scripts:
 
 marketplace:
   owner:
-    name: leverage-works
-    url: https://github.com/leverage-works
+    name: accelerate-toolkit
+    url: https://github.com/accelerate-toolkit
   outputs:
     claude: {}
     codex: {}
@@ -22,7 +22,7 @@ marketplace:
     strategy: lockstep
   packages:
     - name: org-meta-bundle
-      source: leverage-works/agent-context
+      source: accelerate-toolkit/agent-context
       subdir: packages/org-meta-bundle
       version: 0.5.0
       category: Productivity

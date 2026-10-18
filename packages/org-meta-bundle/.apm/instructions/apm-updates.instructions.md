@@ -10,13 +10,13 @@ applyTo: "**"
 When onboarding dependency management, inspect the repository's existing Renovate
 configuration and runner before adding anything. Reuse the organization's preset
 when one is published. The shared baseline is
-`github>leverage-works/renovate-config`; organizations can extend it with their own
+`github>accelerate-toolkit/renovate-config`; organizations can extend it with their own
 policies, and projects should extend their organization preset. If no organization
 preset exists, extend the shared baseline directly in `renovate.json`:
 
 ```json
 {
-  "extends": ["github>leverage-works/renovate-config"]
+  "extends": ["github>accelerate-toolkit/renovate-config"]
 }
 ```
 

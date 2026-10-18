@@ -1,8 +1,8 @@
 {
   "name": "agent-context",
   "owner": {
-    "name": "leverage-works",
-    "url": "https://github.com/leverage-works"
+    "name": "accelerate-toolkit",
+    "url": "https://github.com/accelerate-toolkit"
   },
   "plugins": [
     {
@@ -11,7 +11,7 @@
       "version": "0.5.0",
       "source": {
         "source": "git-subdir",
-        "url": "leverage-works/agent-context",
+        "url": "accelerate-toolkit/agent-context",
         "path": "packages/org-meta-bundle",
         "ref": "v0.5.0"
       }

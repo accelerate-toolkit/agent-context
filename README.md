@@ -1,6 +1,6 @@
 # agent-context
 
-Codex-first APM packages for the leverage-works organization.
+Codex-first APM packages for the accelerate-toolkit organization.
 
 ## Onboard a Codex Workspace
 
@@ -37,7 +37,7 @@ organization workflows.
    existing `v0.2.0` release; select the published release you want to adopt:
 
    ```sh
-   apm install leverage-works/agent-context/packages/org-meta-bundle#v0.2.0 --target codex
+   apm install accelerate-toolkit/agent-context/packages/org-meta-bundle#v0.2.0 --target codex
    apm compile --target codex
    ```
 
@@ -62,11 +62,11 @@ their organization's published preset; when none exists, add this baseline to
 
 ```json
 {
-  "extends": ["github>leverage-works/renovate-config"]
+  "extends": ["github>accelerate-toolkit/renovate-config"]
 }
 ```
 
-The public [shared preset](https://github.com/leverage-works/renovate-config)
+The public [shared preset](https://github.com/accelerate-toolkit/renovate-config)
 centralizes dependency rules. Organization presets add local policy, and project
 configs retain exceptions. An unpinned preset follows its default branch on each
 run; use a published tag when a versioned rollout is needed.
