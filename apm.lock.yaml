@@ -1,10 +1,10 @@
 lockfile_version: '1'
-generated_at: '2026-10-18T23:06:44.293103+00:00'
+generated_at: '2026-10-18T23:07:07.331081+00:00'
 apm_version: 0.30.0
 dependencies:
 - repo_url: _local/org-meta-bundle
   name: org-meta-bundle
-  version: 0.4.0
+  version: 0.5.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/collaborate-cross-repos
