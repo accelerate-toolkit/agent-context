@@ -1,6 +1,22 @@
 # agent-context
 
-Codex-first APM packages for the accelerate-toolkit organization.
+Codex-first APM packages for software projects in the accelerate-toolkit organization.
+`org-meta-bundle` assumes a software development context. Non-software projects
+are outside its scope; separate guidance can be forked when needed.
+
+## Software development lifecycle
+
+The bundle applies three continuous principles to planning, architecture,
+implementation, testing and delivery: **Context**, **Feedback loops** and
+**Trajectory**. Read the
+[shared SDLC explanation](packages/org-meta-bundle/.apm/context/software-development-lifecycle.context.md).
+The concise instruction applies to all files and links to this packaged reference;
+APM rewrites the link when compiling consumer instructions.
+
+Projects retain their own requirements, acceptance journeys and delivery decisions.
+They should document how the shared principles apply locally without maintaining
+a second copy of the shared guidance. Existing consumers adopt new guidance only
+after installing a published release containing it.
 
 ## Onboard a Codex Workspace
 
