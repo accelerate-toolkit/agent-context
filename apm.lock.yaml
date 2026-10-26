@@ -1,5 +1,5 @@
 lockfile_version: '1'
-generated_at: '2026-10-26T09:59:44.407222+00:00'
+generated_at: '2026-10-26T10:06:24.376547+00:00'
 apm_version: 0.30.0
 dependencies:
 - repo_url: _local/frontend-react
@@ -42,9 +42,9 @@ dependencies:
   deployed_file_hashes:
     .agents/skills/collaborate-cross-repos/SKILL.md: sha256:dea8d0226d6b54aef0fedb4e9079e0980955acf1e3da47e2fbd571181b92062d
     .agents/skills/use-apm/SKILL.md: sha256:6301f7c29a69a564ea17440659d870620a66b13bf4fcb56d92e785d70df61acd
-    .agents/skills/use-cached-docs/SKILL.md: sha256:4df2067821e2742c6482ccfb64fa8e8df0d3a9aea0c80fbe608dc20bc9998846
+    .agents/skills/use-cached-docs/SKILL.md: sha256:1a536633b653e9773a31a948d6976e5359617f64eee4e6deff6feeb378fc0b37
     .agents/skills/use-cached-docs/cached-docs.yml: sha256:919a4ba9cd6d392dfbac636d4cd63fe51e86194c54d2e21ca8df40773cc782f3
-    .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py: sha256:87a0823079da5b89bb1b5abb040bcf542d3ff4ee69abe834c85e7c839de21986
+    .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py: sha256:858058d3f0f39a13d16deb07627efd7dff2a2668717e2f5c56ac963914d77dcf
     .agents/skills/work-on-gh-issues/SKILL.md: sha256:5ca4ae82b103cb227d98e2e2f0d1f20940061863cfa6fbbf98500dea7f804f5f
     .agents/skills/work-on-gh-issues/scripts/list_issues.py: sha256:209a25da96cb36d47b51334ba22338701085324f1d834ce82d56aa015e86c725
   source: local
@@ -159,7 +159,7 @@ deployments:
   owners:
   - ./packages/org-meta-bundle
   active_owner: ./packages/org-meta-bundle
-  content_hash: sha256:4df2067821e2742c6482ccfb64fa8e8df0d3a9aea0c80fbe608dc20bc9998846
+  content_hash: sha256:1a536633b653e9773a31a948d6976e5359617f64eee4e6deff6feeb378fc0b37
 - kind: project-relative
   target: codex
   value: .agents/skills/use-cached-docs/cached-docs.yml
@@ -177,7 +177,7 @@ deployments:
   owners:
   - ./packages/org-meta-bundle
   active_owner: ./packages/org-meta-bundle
-  content_hash: sha256:87a0823079da5b89bb1b5abb040bcf542d3ff4ee69abe834c85e7c839de21986
+  content_hash: sha256:858058d3f0f39a13d16deb07627efd7dff2a2668717e2f5c56ac963914d77dcf
 - kind: project-relative
   target: codex
   value: .agents/skills/work-on-gh-issues

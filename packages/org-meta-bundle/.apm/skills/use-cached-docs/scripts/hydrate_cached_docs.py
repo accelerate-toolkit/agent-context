@@ -11,6 +11,10 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
+import subprocess
+from datetime import datetime, timezone
+from uuid import uuid4
 import io
 import json
 import re
@@ -21,7 +25,7 @@ import tempfile
 from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from urllib.parse import quote
+from urllib.parse import quote, urlsplit
 import urllib.request
 
 import certifi
@@ -42,6 +46,14 @@ COMMIT_PATTERN = re.compile(r"^[0-9a-f]{40}$")
 
 
 @dataclass(frozen=True)
+class HttpFile:
+    url: str
+    destination: PurePosixPath
+    format: str
+    text_destination: PurePosixPath | None = None
+
+
+@dataclass(frozen=True)
 class CachedDocsSource:
     identifier: str
     repository: str
@@ -50,6 +62,7 @@ class CachedDocsSource:
     files: tuple[tuple[PurePosixPath, PurePosixPath], ...]
     folders: tuple[tuple[PurePosixPath, PurePosixPath], ...]
     configuration_path: Path
+    http_files: tuple[HttpFile, ...] = ()
 
 
 def request_json(url: str) -> dict[str, object]:
@@ -152,9 +165,17 @@ def load_sources(configuration_path: Path) -> list[CachedDocsSource]:
         if not isinstance(strategy, Mapping):
             raise ValueError(f"{configuration_path}: cached_docs entry {identifier}.strategy must be a mapping")
         strategy_type = required_string(strategy.get("type"), f"{configuration_path}: {identifier}.strategy.type")
+        if strategy_type == "http-files":
+            if entry.get("folders"):
+                raise ValueError("http-files does not support folders")
+            sources.append(CachedDocsSource(
+                identifier, "", strategy_type, "", (), (), configuration_path,
+                configured_http_files(entry),
+            ))
+            continue
         if strategy_type not in {"github-release-http", "github-archive-http"}:
             raise ValueError(
-                f"{configuration_path}: cached_docs entry {identifier} must use github-release-http or github-archive-http"
+                f"{configuration_path}: cached_docs entry {identifier} must use github-release-http, github-archive-http or http-files"
             )
 
         repository = required_string(strategy.get("repository"), f"{configuration_path}: {identifier}.repository")
@@ -258,6 +279,9 @@ def extract_folders(
 
 
 def hydrate(source: CachedDocsSource, cache_root: Path, dry_run: bool) -> None:
+    if source.strategy_type == "http-files":
+        hydrate_http(source, cache_root, dry_run)
+        return
     tag, source_url = source_archive(source)
     destination = cache_root / "tool-docs" / source.identifier / tag
     if dry_run:
@@ -289,18 +313,191 @@ def hydrate(source: CachedDocsSource, cache_root: Path, dry_run: bool) -> None:
     )
 
 
+def https_url(value: object) -> str:
+    url = required_string(value, "url")
+    parsed = urlsplit(url)
+    if (parsed.scheme != "https" or not parsed.hostname or parsed.username
+            or parsed.password or parsed.fragment):
+        raise ValueError("Documentation URLs must use HTTPS without credentials or fragments")
+    return url
+
+
+def configured_http_files(entry: Mapping) -> tuple[HttpFile, ...]:
+    entries = entry.get("files")
+    if not isinstance(entries, list) or not entries:
+        raise ValueError("http-files requires a nonempty files list")
+    files = []
+    outputs = [PurePosixPath(name) for name in
+               ("INDEX.md", "provenance.json", "SHA256SUMS", "cached-docs.yml")]
+    for item in entries:
+        if not isinstance(item, Mapping):
+            raise ValueError("HTTP file must be a mapping")
+        url = https_url(item.get("url"))
+        destination = relative_folder(item.get("destination"), "destination")
+        kind = item.get("format", "text")
+        if kind not in {"text", "markdown", "pdf"}:
+            raise ValueError("HTTP file format must be text, markdown or pdf")
+        text_destination = None
+        if "text_destination" in item:
+            if kind != "pdf":
+                raise ValueError("text_destination requires PDF format")
+            text_destination = relative_folder(item["text_destination"], "text_destination")
+        for output in (destination, text_destination):
+            if output is None:
+                continue
+            if any(output == old or output in old.parents or old in output.parents for old in outputs):
+                raise ValueError(f"Conflicting or reserved destination: {output}")
+            if any(char in str(output) for char in "\n\r\\"):
+                raise ValueError("Destinations must not contain newlines or backslashes")
+            outputs.append(output)
+        files.append(HttpFile(url, destination, kind, text_destination))
+    return tuple(files)
+
+
+class HTTPSRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, request, fp, code, msg, headers, newurl):
+        https_url(newurl)
+        return super().redirect_request(request, fp, code, msg, headers, newurl)
+
+
+def download_http(url: str, destination: Path) -> dict:
+    opener = urllib.request.build_opener(
+        HTTPSRedirectHandler(), urllib.request.HTTPSHandler(context=SSL_CONTEXT)
+    )
+    request = urllib.request.Request(https_url(url), headers={"User-Agent": USER_AGENT})
+    with opener.open(request, timeout=60) as response, destination.open("wb") as output:
+        shutil.copyfileobj(response, output)
+        return {"resolved_url": response.url,
+                "headers": {key: response.headers[key] for key in
+                            ("ETag", "Last-Modified", "Content-Type") if key in response.headers}}
+
+
+def utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def file_hash(path: Path) -> str:
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def hydrate_http(source: CachedDocsSource, cache_root: Path, dry_run: bool) -> None:
+    parent = cache_root / "tool-docs" / source.identifier
+    if dry_run:
+        print(f"Would hydrate {len(source.http_files)} HTTPS files into {parent}/<snapshot>/")
+        return
+    extractor = None
+    if any(item.text_destination for item in source.http_files):
+        extractor = subprocess.run(["pdftotext", "-v"], check=True, capture_output=True,
+                                   text=True).stderr.strip()
+    parent.mkdir(parents=True, exist_ok=True)
+    name = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid4().hex[:12]
+    destination = parent / name
+    provenance = {"source_id": source.identifier, "strategy": "http-files",
+                  "retrieval_started": utc_now(), "pdftotext_version": extractor, "files": []}
+    index = ["# Documentation snapshot", "",
+             "Upstream HTTP sources are mutable; this is a retrieval snapshot, not a release.",
+             "See provenance.json and SHA256SUMS. Text extracts are local derivatives.",
+             "Links inside upstream documents may refer to uncached pages.", ""]
+    with tempfile.TemporaryDirectory(dir=parent, prefix=".download-") as temp:
+        stage = Path(temp)
+        shutil.copyfile(source.configuration_path, stage / "cached-docs.yml")
+        for item in source.http_files:
+            target = stage / item.destination
+            target.parent.mkdir(parents=True, exist_ok=True)
+            metadata = download_http(item.url, target)
+            with target.open("rb") as stream:
+                prefix = stream.read(1024)
+            if not prefix:
+                raise ValueError(f"Empty documentation: {item.url}")
+            if item.format == "pdf":
+                if not prefix.startswith(b"%PDF-"):
+                    raise ValueError(f"Expected PDF: {item.url}")
+            else:
+                if re.search(rb"<!doctype\s+html|<html[\s>]", prefix, re.I):
+                    raise ValueError(f"Unexpected HTML: {item.url}")
+                target.read_text(encoding="utf-8")
+            metadata.update(url=item.url, destination=str(item.destination),
+                            retrieved_at=utc_now(), sha256=file_hash(target))
+            index.append(f"- [{item.destination}]({quote(str(item.destination))}) — {item.url}")
+            if item.text_destination:
+                text_path = stage / item.text_destination
+                text_path.parent.mkdir(parents=True, exist_ok=True)
+                subprocess.run(["pdftotext", "-layout", str(target), str(text_path)], check=True)
+                if not text_path.stat().st_size:
+                    raise ValueError(f"Empty PDF text extract: {item.url}")
+                metadata.update(text_destination=str(item.text_destination),
+                                text_sha256=file_hash(text_path))
+                index.append(f"  - [Searchable text]({quote(str(item.text_destination))})")
+            provenance["files"].append(metadata)
+        provenance["retrieval_completed"] = utc_now()
+        (stage / "provenance.json").write_text(json.dumps(provenance, indent=2) + "\n")
+        (stage / "INDEX.md").write_text("\n".join(index) + "\n")
+        checksums = "".join(f"{file_hash(path)}  {path.relative_to(stage).as_posix()}\n"
+                            for path in sorted(stage.rglob("*")) if path.is_file())
+        (stage / "SHA256SUMS").write_text(checksums)
+        stage.rename(destination)
+    # Publish the pointer only after every download and extraction succeeded.
+    pointer = parent / (".current-" + name)
+    try:
+        pointer.symlink_to(name, target_is_directory=True)
+        pointer.replace(parent / "current")
+    finally:
+        pointer.unlink(missing_ok=True)
+    print(f"Hydrated {len(source.http_files)} HTTP files into {destination}")
+
+
+def check_http_cache(source: CachedDocsSource, cache_root: Path) -> None:
+    if source.strategy_type != "http-files":
+        raise ValueError("--check currently supports only http-files sources; select one with --source")
+    current = cache_root / "tool-docs" / source.identifier / "current"
+    lines = (current / "SHA256SUMS").read_text().splitlines()
+    if not lines:
+        raise ValueError("Empty checksum manifest")
+    checked = set()
+    for line in lines:
+        digest, name = line.split("  ", 1)
+        relative = relative_folder(name, "checksum path")
+        path = current / relative
+        if not path.resolve().is_relative_to(current.resolve()):
+            raise ValueError(f"Checksum path leaves snapshot: {name}")
+        if not re.fullmatch(r"[0-9a-f]{64}", digest) or file_hash(path) != digest:
+            raise ValueError(f"Checksum mismatch: {name}")
+        checked.add(relative)
+    required = {item.destination for item in source.http_files}
+    required.update(item.text_destination for item in source.http_files if item.text_destination)
+    if not required.issubset(checked):
+        raise ValueError("Snapshot is missing configured files; refresh the cache")
+    print(f"Verified {len(checked)} files offline in {current}")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dry-run", action="store_true", help="Resolve releases without downloading or writing files.")
-    return parser.parse_args()
+    parser.add_argument("--source", action="append", help="Hydrate only this source ID (repeatable).")
+    parser.add_argument("--manifest", type=Path, help="Read one explicit manifest instead of discovery.")
+    parser.add_argument("--check", action="store_true", help="Verify selected HTTP snapshots offline.")
+    args = parser.parse_args()
+    if args.check and args.dry_run:
+        parser.error("--check and --dry-run cannot be combined")
+    return args
 
 
 def main() -> None:
     args = parse_args()
     workspace_root = Path.cwd()
     cache_root = workspace_root / ".agent-cache"
-    for source in discover_sources(workspace_root):
-        hydrate(source, cache_root, args.dry_run)
+    sources = load_sources(args.manifest) if args.manifest else discover_sources(workspace_root)
+    if args.source:
+        missing = set(args.source) - {source.identifier for source in sources}
+        if missing:
+            raise ValueError(f"Unknown source IDs: {', '.join(sorted(missing))}")
+        sources = [source for source in sources if source.identifier in args.source]
+    for source in sources:
+        if args.check:
+            check_http_cache(source, cache_root)
+        else:
+            hydrate(source, cache_root, args.dry_run)
 
 
 if __name__ == "__main__":
