@@ -29,7 +29,14 @@ import yaml
 
 
 USER_AGENT = "agent-context-hydrate-cached-docs"
-SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
+def create_ssl_context() -> ssl.SSLContext:
+    """Keep system/SSL_CERT_FILE trust (including managed proxies) plus certifi."""
+    context = ssl.create_default_context()
+    context.load_verify_locations(cafile=certifi.where())
+    return context
+
+
+SSL_CONTEXT = create_ssl_context()
 IDENTIFIER_PATTERN = re.compile(r"^[a-z0-9][a-z0-9._-]*$")
 COMMIT_PATTERN = re.compile(r"^[0-9a-f]{40}$")
 

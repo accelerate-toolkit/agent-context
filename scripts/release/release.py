@@ -18,7 +18,6 @@ VERSION = re.compile(r"(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)")
 SUBJECT = re.compile(r"^(?P<type>[a-z]+)(?:\([^)]+\))?(?P<breaking>!)?: .+")
 RELEASE = re.compile(r"^chore\(release\): v(\d+\.\d+\.\d+)$")
 ROOT_MANIFEST = Path("apm.yml")
-PACKAGE_MANIFEST = Path("packages/org-meta-bundle/apm.yml")
 INDEX = Path(".claude-plugin/marketplace.json")
 
 
@@ -109,51 +108,61 @@ def plan(repo: str | None = None) -> dict:
                 notes=notes(version, changes))
 
 
-def metadata() -> tuple[dict, dict]:
-    return yaml.safe_load(ROOT_MANIFEST.read_text()), yaml.safe_load(PACKAGE_MANIFEST.read_text())
+def metadata() -> tuple[dict, list[dict]]:
+    root = yaml.safe_load(ROOT_MANIFEST.read_text())
+    packages = [yaml.safe_load((Path(entry["subdir"]) / "apm.yml").read_text())
+                for entry in root["marketplace"]["packages"]]
+    return root, packages
 
 
-def marketplace(root: dict, package: dict) -> dict:
-    entry = root["marketplace"]["packages"][0]
+def marketplace(root: dict, packages: list[dict]) -> dict:
     return {"name": root["name"], "owner": root["marketplace"]["owner"], "plugins": [{
         "name": package["name"], "description": package["description"], "version": package["version"],
         "source": {"source": "git-subdir", "url": entry["source"], "path": entry["subdir"],
-                   "ref": "v" + package["version"]}}]}
+                   "ref": "v" + package["version"]}}
+        for entry, package in zip(root["marketplace"]["packages"], packages, strict=True)]}
 
 
 def check(*, release_ready: bool = False) -> None:
-    root, package = metadata()
+    root, packages = metadata()
     version_tuple(root["version"])
-    if not root["version"] == package["version"] == root["marketplace"]["packages"][0]["version"]:
-        raise ValueError("root, bundle and marketplace versions must agree")
+    entries = root["marketplace"]["packages"]
+    if len({entry["name"] for entry in entries}) != len(entries):
+        raise ValueError("duplicate marketplace package names")
+    for entry, package in zip(entries, packages, strict=True):
+        if entry["name"] != package["name"] or not root["version"] == package["version"] == entry["version"]:
+            raise ValueError("root, packages and marketplace versions/names must agree")
     index = json.loads(INDEX.read_text())
-    expected = marketplace(root, package)
+    expected = marketplace(root, packages)
     if index != expected and not release_ready:
-        # Between releases the published index may lag development manifests.
-        # Validate against the actual historical package, never invent a tag.
+        # The published index may omit packages added since its tagged release.
         old_version = index["plugins"][0]["version"]
-        if version_tuple(old_version) < version_tuple(root["version"]):
+        if version_tuple(old_version) <= version_tuple(root["version"]):
             tag = "v" + old_version
-            historical = yaml.safe_load(git("show", f"{tag}:{PACKAGE_MANIFEST.as_posix()}"))
-            expected = marketplace(root, historical)
-            if "sha" in index["plugins"][0]["source"]:
-                expected["plugins"][0]["source"]["sha"] = git("rev-parse", tag + "^{commit}")
+            historical_root = yaml.safe_load(git("show", f"{tag}:{ROOT_MANIFEST.as_posix()}"))
+            historical = [yaml.safe_load(git("show", f"{tag}:{entry['subdir']}/apm.yml"))
+                          for entry in historical_root["marketplace"]["packages"]]
+            expected = marketplace(historical_root, historical)
+            for actual, plugin in zip(index["plugins"], expected["plugins"]):
+                if "sha" in actual["source"]:
+                    plugin["source"]["sha"] = git("rev-parse", tag + "^{commit}")
     if index != expected:
         raise ValueError("marketplace index does not match package metadata")
 
 
 def sync(version: str) -> None:
     version_tuple(version)
-    # Preserve comments and authored YAML formatting. These manifests only use
-    # version fields for the root, package and its marketplace entry.
-    for path, expected in ((ROOT_MANIFEST, 2), (PACKAGE_MANIFEST, 1)):
+    root, _ = metadata()
+    paths = [(ROOT_MANIFEST, 1 + len(root["marketplace"]["packages"]))]
+    paths.extend((Path(entry["subdir"]) / "apm.yml", 1) for entry in root["marketplace"]["packages"])
+    for path, expected in paths:
         text, count = re.subn(r"(?m)^(\s*version:) .+$", lambda m: f"{m[1]} {version}", path.read_text())
         if count != expected:
             raise ValueError(f"unexpected version fields in {path}")
         path.write_text(text)
-    root, package = metadata()
+    root, packages = metadata()
     INDEX.parent.mkdir(parents=True, exist_ok=True)
-    INDEX.write_text(json.dumps(marketplace(root, package), indent=2) + "\n")
+    INDEX.write_text(json.dumps(marketplace(root, packages), indent=2) + "\n")
     check(release_ready=True)
 
 

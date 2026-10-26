@@ -9,6 +9,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+import yaml
 from unittest.mock import patch
 
 import release
@@ -26,7 +27,7 @@ class ReleaseTests(unittest.TestCase):
         for args in (("init", "-q"), ("config", "user.name", "Test"),
                      ("config", "user.email", "test@example.invalid")):
             release.git(*args)
-        for name in ("apm.yml", "packages/org-meta-bundle/apm.yml", ".claude-plugin/marketplace.json"):
+        for name in ("apm.yml", "packages/org-meta-bundle/apm.yml", "packages/frontend-react/apm.yml", ".claude-plugin/marketplace.json"):
             path = Path(name)
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text((ROOT / name).read_text())
@@ -46,6 +47,36 @@ class ReleaseTests(unittest.TestCase):
         sha = self.commit("chore(release): v0.3.0", "Synchronize release metadata.")
         Path("notes.md").write_text(release.plan()["notes"])
         return sha
+
+    def test_new_package_keeps_published_index_until_release(self):
+        root, _ = release.metadata()
+        root["marketplace"]["packages"].append({
+            "name": "optional-test", "source": "example/context",
+            "subdir": "packages/optional-test", "version": root["version"],
+        })
+        release.ROOT_MANIFEST.write_text(yaml.safe_dump(root, sort_keys=False))
+        package = Path("packages/optional-test/apm.yml")
+        package.parent.mkdir(parents=True)
+        package.write_text(yaml.safe_dump({"name": "optional-test",
+            "description": "Test package", "version": root["version"]}))
+        release.check()
+        with self.assertRaises(ValueError):
+            release.check(release_ready=True)
+        release.sync("0.3.0")
+        self.assertEqual(len(json.loads(release.INDEX.read_text())["plugins"]), 3)
+        release.check(release_ready=True)
+
+    def test_all_packages_release_in_lockstep(self):
+        release.sync("0.3.0")
+        root, packages = release.metadata()
+        self.assertEqual(len(packages), 2)
+        self.assertTrue(all(p["version"] == "0.3.0" for p in packages))
+        self.assertEqual(len(json.loads(release.INDEX.read_text())["plugins"]), 2)
+        release.check(release_ready=True)
+        path = Path("packages/frontend-react/apm.yml")
+        path.write_text(path.read_text().replace("0.3.0", "0.2.0"))
+        with self.assertRaisesRegex(ValueError, "versions/names"):
+            release.check()
 
     def test_highest_bump_and_bodyless_commit(self):
         self.commit("fix: correct guidance")

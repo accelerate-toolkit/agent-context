@@ -3,6 +3,7 @@ import io
 import tarfile
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 from pathlib import PurePosixPath
 import sys
@@ -17,6 +18,14 @@ SPEC.loader.exec_module(hydrator)
 
 
 class HydrateCachedDocsTests(unittest.TestCase):
+    def test_tls_keeps_default_trust_and_adds_certifi(self):
+        with patch.object(hydrator.ssl, "create_default_context") as factory:
+            context = hydrator.create_ssl_context()
+        factory.assert_called_once_with()
+        self.assertIs(context, factory.return_value)
+        context.load_verify_locations.assert_called_once_with(cafile=hydrator.certifi.where())
+
+
     def test_extracts_selected_files_and_folders(self) -> None:
         archive = io.BytesIO()
         with tarfile.open(fileobj=archive, mode="w:gz") as tar:

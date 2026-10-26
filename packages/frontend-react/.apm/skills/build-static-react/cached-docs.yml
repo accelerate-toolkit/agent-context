@@ -1,0 +1,56 @@
+cached_docs:
+  - id: react
+    strategy:
+      type: github-archive-http
+      repository: reactjs/react.dev
+      ref: ae5e48074d4f73f1e349eda2a66841f9a959023e
+    files:
+      - source: LICENSE-DOCS.md
+    folders:
+      - source: src/content/learn
+      - source: src/content/reference/react
+      - source: src/content/reference/react-dom
+  - id: typescript
+    strategy:
+      type: github-archive-http
+      repository: microsoft/TypeScript-Website
+      ref: 3b069fb7d66c9c69b590c18e5cb9f9fa92b16467
+    files:
+      - source: LICENSE
+      - source: LICENSE-CODE
+      - source: packages/tsconfig-reference/copy/en/options/strict.md
+      - source: packages/tsconfig-reference/copy/en/options/noUncheckedIndexedAccess.md
+    folders:
+      - source: packages/documentation/copy/en/handbook-v2
+  - id: vite
+    strategy:
+      type: github-archive-http
+      repository: vitejs/vite
+      ref: 981f07fa4580fb88b333c4450431e4715d2a0b82
+    files:
+      - source: LICENSE
+      - source: docs/guide/index.md
+      - source: docs/guide/features.md
+      - source: docs/guide/build.md
+      - source: docs/guide/static-deploy.md
+      - source: docs/guide/env-and-mode.md
+      - source: docs/guide/assets.md
+      - source: docs/config/build-options.md
+  - id: mdn-web
+    strategy:
+      type: github-archive-http
+      repository: mdn/content
+      ref: 9de14917b151f7db567a65d44c2685cea754b12a
+    files:
+      - source: LICENSE.md
+      - source: files/en-us/web/api/fetch_api/using_fetch/index.md
+      - source: files/en-us/web/api/abortcontroller/index.md
+      - source: files/en-us/web/security/attacks/csrf/index.md
+      - source: files/en-us/web/security/practical_implementation_guides/csp/index.md
+      - source: files/en-us/web/accessibility/aria/guides/live_regions/index.md
+      - source: files/en-us/web/css/guides/cascading_variables/using_custom_properties/index.md
+      - source: files/en-us/web/css/reference/at-rules/@media/prefers-reduced-motion/index.md
+      - source: files/en-us/web/accessibility/guides/understanding_wcag/keyboard/index.md
+      - source: files/en-us/web/html/reference/elements/button/index.md
+      - source: files/en-us/web/html/reference/elements/form/index.md
+      - source: files/en-us/web/html/reference/elements/label/index.md

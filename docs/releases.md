@@ -141,3 +141,13 @@ References: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0
 [Semantic Versioning](https://semver.org/),
 [Renovate APM manager](https://docs.renovatebot.com/modules/manager/apm/), and
 [Git hooks](https://git-scm.com/docs/githooks).
+
+## Optional packages in the lockstep release
+
+The root marketplace declares org-meta-bundle and the optional frontend-react
+package. All declared package manifests and marketplace entries advance together;
+consumers choose packages independently. The release tool enumerates those entries
+and the workflow stages package manifests together. A newly added package is not
+available at older tags even if its development version matches existing metadata.
+The tracked published marketplace may retain its historical single-package contents
+until the next release; release preparation generates the complete new index.

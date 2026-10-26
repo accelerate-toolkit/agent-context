@@ -206,7 +206,8 @@ you to run `make apm-install`. The reminder performs no upstream check or update
 
 ## Structure
 
-- `packages/` contains independently versioned APM packages.
+- `packages/` contains separately selectable APM packages released in lockstep.
+- `packages/frontend-react/` provides optional static React guidance and pinned official references; see its [adoption notes](packages/frontend-react/README.md).
 - `packages/org-meta-bundle/` provides the organization-wide Codex workflows.
 - `.agent-cache/` is generated local documentation state.
 
@@ -236,3 +237,14 @@ apm pack --marketplace-path claude=build/claude-marketplace.json --marketplace-p
 
 The scripts and guidance in this repository are available under the
 [MIT licence](LICENCE).
+
+## Frontend documentation trial
+
+For the optional frontend package, run `make apm-install-dry-run`, then
+`make apm-install`, `make docs-hydrate-preview`, `make docs-hydrate` and
+`make frontend-docs-verify`. The root maintainer install includes both local
+packages; consumers opt into frontend-react separately. No npm packages are
+installed by this workflow. Hydration uses the existing shared tool and downloads
+full upstream archives before selecting paths. The offline smoke check requires rg.
+
+See [hydration evidence](docs/frontend-hydration.md) for observed results and limits.

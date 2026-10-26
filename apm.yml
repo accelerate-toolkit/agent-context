@@ -8,6 +8,7 @@ targets:
 devDependencies:
   apm:
     - path: ./packages/org-meta-bundle
+    - path: ./packages/frontend-react
 scripts:
   hydrate-cached-docs: uv run .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py
 
@@ -26,3 +27,8 @@ marketplace:
       subdir: packages/org-meta-bundle
       version: 0.6.0
       category: Productivity
+    - name: frontend-react
+      source: accelerate-toolkit/agent-context
+      subdir: packages/frontend-react
+      version: 0.6.0
+      category: Development
