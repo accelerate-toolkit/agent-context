@@ -1,10 +1,10 @@
 lockfile_version: '1'
-generated_at: '2026-10-26T10:06:24.376547+00:00'
+generated_at: '2026-10-26T10:12:59.027960+00:00'
 apm_version: 0.30.0
 dependencies:
 - repo_url: _local/frontend-react
   name: frontend-react
-  version: 0.7.0
+  version: 0.8.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/build-static-react
@@ -25,7 +25,7 @@ dependencies:
   declared_license: MIT
 - repo_url: _local/org-meta-bundle
   name: org-meta-bundle
-  version: 0.7.0
+  version: 0.8.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/collaborate-cross-repos

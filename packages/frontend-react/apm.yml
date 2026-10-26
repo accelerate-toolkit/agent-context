@@ -1,5 +1,5 @@
 name: frontend-react
-version: 0.7.0
+version: 0.8.0
 description: Minimal static React applications with reviewed dependencies and pinned official documentation.
 author: accelerate-toolkit
 license: MIT

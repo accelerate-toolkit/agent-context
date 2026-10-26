@@ -1,5 +1,5 @@
 name: agent-context
-version: 0.7.0
+version: 0.8.0
 description: Codex-first APM packages for accelerate-toolkit.
 author: accelerate-toolkit
 license: MIT
@@ -25,10 +25,10 @@ marketplace:
     - name: org-meta-bundle
       source: accelerate-toolkit/agent-context
       subdir: packages/org-meta-bundle
-      version: 0.7.0
+      version: 0.8.0
       category: Productivity
     - name: frontend-react
       source: accelerate-toolkit/agent-context
       subdir: packages/frontend-react
-      version: 0.7.0
+      version: 0.8.0
       category: Development
