@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["PyYAML==6.0.3", "certifi>=2025.0.0", "pypdf==6.21.4"]
+# dependencies = ["PyYAML==6.0.3", "certifi>=2025.0.0"]
 # ///
 """Run bundled-script tests with their declared runtime dependencies."""
 from pathlib import Path
