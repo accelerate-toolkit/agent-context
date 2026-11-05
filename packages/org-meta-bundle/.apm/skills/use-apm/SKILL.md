@@ -62,21 +62,71 @@ collisions and bypasses the critical security-scan block.
 Use a local package when its workflows, terminology, or tools only make sense
 in one repository. Local `path:` dependencies MUST live below the repository
 root that owns the declaring `apm.yml`; use a repository-relative path such as
-`./local-apm-packages/project-workflows`.
+`./local-apm-packages/follow-sdlc-principles`.
 
 Do not use `../` paths, absolute paths, or paths into sibling repositories.
 APM may support those forms, but they make a workspace depend on a machine-local
 checkout. Put cross-repository workflows in a remote Git or marketplace package
 instead.
 
-For example, `example-project` can keep its context-specific package inside that
-repository and declare it as a regular dependency in its root `apm.yml` when
-every contributor needs its workflows:
+Use lowercase, hyphen-separated package names that describe their purpose:
+
+- `use-<tool>` for tool-use guidance, such as `use-obsidian`.
+- `follow-<practice-or-principles>` for rules to follow, such as
+  `follow-sdlc-principles`.
+- A descriptive name such as `project-workflows` for a broader bundle that
+  does not fit either prefix.
+
+Keep the package directory basename and its `apm.yml` `name` identical by
+convention. These prefixes and matching names are organization conventions,
+not APM parser requirements.
+
+Package names identify bundles, independently of the primitives inside them.
+A skill has its own `.apm/skills/<skill-name>/SKILL.md`, with matching skill
+folder and frontmatter `name`; it need not share the package name. Instruction
+files use descriptive `.apm/instructions/<topic>.instructions.md` names and
+do not need to match the package name. An instructions-only package needs no
+skill folder or `SKILL.md`. The `follow-` prefix does not activate instructions;
+their scope and compilation determine where they apply.
+
+For example, keep repository-specific SDLC rules in this instructions-only
+package:
+
+```text
+local-apm-packages/follow-sdlc-principles/
+  apm.yml
+  .apm/instructions/sdlc-principles.instructions.md
+```
+
+Its `apm.yml` declares:
+
+```yaml
+name: follow-sdlc-principles
+version: 0.1.0
+description: Repository-specific software delivery principles
+target: codex
+```
+
+The instruction file uses `applyTo: "**"` for repository-wide scope:
+
+```markdown
+---
+applyTo: "**"
+---
+
+# SDLC principles
+
+Establish the delivery context, define observable acceptance criteria, and
+preserve sustainable component boundaries throughout implementation.
+```
+
+Declare it as a regular dependency in the repository root's `apm.yml` so every
+contributor receives the instructions:
 
 ```yaml
 dependencies:
   apm:
-    - path: ./local-apm-packages/project-workflows
+    - path: ./local-apm-packages/follow-sdlc-principles
 ```
 
 Use `devDependencies.apm` only for maintainer-only content, such as test

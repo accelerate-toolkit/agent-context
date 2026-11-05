@@ -1,10 +1,10 @@
 lockfile_version: '1'
-generated_at: '2026-11-05T11:07:24.111249+00:00'
+generated_at: '2026-11-05T11:25:03.889719+00:00'
 apm_version: 0.30.0
 dependencies:
 - repo_url: _local/frontend-react
   name: frontend-react
-  version: 0.8.1
+  version: 0.8.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/build-static-react
@@ -25,7 +25,7 @@ dependencies:
   declared_license: MIT
 - repo_url: _local/org-meta-bundle
   name: org-meta-bundle
-  version: 0.8.1
+  version: 0.8.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/collaborate-cross-repos
@@ -35,15 +35,17 @@ dependencies:
   - .agents/skills/use-apm/cached-docs.yml
   - .agents/skills/use-cached-docs
   - .agents/skills/use-cached-docs/SKILL.md
+  - .agents/skills/use-cached-docs/scripts/__pycache__/hydrate_cached_docs.cpython-311.pyc
   - .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py
   - .agents/skills/work-on-gh-issues
   - .agents/skills/work-on-gh-issues/SKILL.md
   - .agents/skills/work-on-gh-issues/scripts/list_issues.py
   deployed_file_hashes:
     .agents/skills/collaborate-cross-repos/SKILL.md: sha256:dea8d0226d6b54aef0fedb4e9079e0980955acf1e3da47e2fbd571181b92062d
-    .agents/skills/use-apm/SKILL.md: sha256:bb460e19ae014bce9fc6c644f96c4d6026ed1834e544cd039a944683797f45eb
+    .agents/skills/use-apm/SKILL.md: sha256:bb9b9f0ff7ca785449acadd7aa091c29bd73e5625b2bcac80e6c16ba99d4c80c
     .agents/skills/use-apm/cached-docs.yml: sha256:919a4ba9cd6d392dfbac636d4cd63fe51e86194c54d2e21ca8df40773cc782f3
     .agents/skills/use-cached-docs/SKILL.md: sha256:1a536633b653e9773a31a948d6976e5359617f64eee4e6deff6feeb378fc0b37
+    .agents/skills/use-cached-docs/scripts/__pycache__/hydrate_cached_docs.cpython-311.pyc: sha256:f4fbaa2140ed8c6284f7a3e476860369d9c874557fcdd8febb1883a722cf27c5
     .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py: sha256:858058d3f0f39a13d16deb07627efd7dff2a2668717e2f5c56ac963914d77dcf
     .agents/skills/work-on-gh-issues/SKILL.md: sha256:5ca4ae82b103cb227d98e2e2f0d1f20940061863cfa6fbbf98500dea7f804f5f
     .agents/skills/work-on-gh-issues/scripts/list_issues.py: sha256:209a25da96cb36d47b51334ba22338701085324f1d834ce82d56aa015e86c725
@@ -141,7 +143,7 @@ deployments:
   owners:
   - ./packages/org-meta-bundle
   active_owner: ./packages/org-meta-bundle
-  content_hash: sha256:bb460e19ae014bce9fc6c644f96c4d6026ed1834e544cd039a944683797f45eb
+  content_hash: sha256:bb9b9f0ff7ca785449acadd7aa091c29bd73e5625b2bcac80e6c16ba99d4c80c
 - kind: project-relative
   target: codex
   value: .agents/skills/use-apm/cached-docs.yml
@@ -169,6 +171,15 @@ deployments:
   - ./packages/org-meta-bundle
   active_owner: ./packages/org-meta-bundle
   content_hash: sha256:1a536633b653e9773a31a948d6976e5359617f64eee4e6deff6feeb378fc0b37
+- kind: project-relative
+  target: codex
+  value: .agents/skills/use-cached-docs/scripts/__pycache__/hydrate_cached_docs.cpython-311.pyc
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/org-meta-bundle
+  active_owner: ./packages/org-meta-bundle
+  content_hash: sha256:f4fbaa2140ed8c6284f7a3e476860369d9c874557fcdd8febb1883a722cf27c5
 - kind: project-relative
   target: codex
   value: .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py
