@@ -5,6 +5,22 @@ description: Use when authoring, installing, validating, or publishing APM packa
 
 # Use APM
 
+## Consult Cached Documentation
+
+Check `apm --version` and search `.agent-cache/tool-docs/apm/<tag>/` before
+using the network. This skill's `cached-docs.yml` caches the upstream README
+and docs. Use the installed `use-cached-docs` skill to hydrate missing or stale
+docs; when configured, run `apm run hydrate-cached-docs` from the workspace root.
+`version: latest` is resolved only when the hydrator runs, not on every read.
+Compare the cached tag with the installed CLI version before using new flags.
+
+Within the cache, start at `docs/src/content/docs/`:
+
+- `reference/cli/install.md` and `compile.md` for installation and compilation.
+- `reference/manifest-schema.md` and `lockfile-spec.md` for dependency declarations.
+- `reference/targets-matrix.md` for supported primitives and deployment paths.
+- `reference/cli/pack.md` and `producer/publish-to-a-marketplace.md` for distribution.
+
 ## Authoring
 
 - Author package content under `.apm/`; do not edit generated deployment output.
@@ -13,14 +29,33 @@ description: Use when authoring, installing, validating, or publishing APM packa
 
 ## Codex Workflow
 
-Use a dry run before installing managed package content:
+Prefer the repository's documented Make actions. For initial setup or intentional
+manifest/local-source changes, preview and install, then compile instructions:
 
 ```sh
 apm install --target codex --dry-run
 apm install --target codex
+apm compile --target codex
 ```
 
-Codex receives skills under `.agents/skills/`. It receives agents under `.codex/agents/` and compiled instructions through `AGENTS.md`; edit package source instead of those generated files.
+A dry run can report an incomplete dependency preview when remote metadata is
+unavailable; it is not proof that the live install will succeed.
+
+For routine setup with an accepted lockfile, use `apm install --frozen --target codex`,
+then compile. Frozen installation rejects manifest or local-source drift instead
+of updating the lock. After intentional changes, use a normal install to record
+the new state and review `apm.lock.yaml`. Use `apm install --update --target codex`
+only for deliberate dependency updates; it resolves within declared refs and
+does not advance an explicit release pin to a different release.
+
+Codex receives skills under `.agents/skills/` and agents as
+`.codex/agents/<name>.toml`. Installation does not compile Codex instructions:
+`apm compile --target codex` produces `AGENTS.md`. Edit package source instead
+of generated output, and restart the agent session after refreshing it.
+
+Resolve unmanaged file conflicts by inspecting ownership and adjusting names or
+package selections. Do not use `--force` as a routine repair: it overwrites
+collisions and bypasses the critical security-scan block.
 
 ## Workspace-Local Packages
 
@@ -54,6 +89,7 @@ from the workspace root after adding or changing a dependency:
 ```sh
 apm install --target codex --dry-run
 apm install --target codex
+apm compile --target codex
 ```
 
 A local package is versioned with the repository that owns it and should be
@@ -70,3 +106,7 @@ apm pack
 ```
 
 Use local path dependencies while developing packages in the same repository. Install from the published marketplace only after the package release is available.
+
+Bundle dependencies come from lockfile-attested deployed files and their hashes,
+not directly from `apm_modules/`. Refresh installation after source changes before
+packing. A successful pack creates local artifacts; publication is a separate step.
