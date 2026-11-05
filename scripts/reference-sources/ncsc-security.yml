@@ -1,0 +1,8 @@
+cached_docs:
+  - id: ncsc-software-security
+    strategy:
+      type: http-files
+    files:
+      - url: https://assets.publishing.service.gov.uk/media/69a8060a2e1f4fbda4252270/Software_Security_Code_of_Practice_Web_Accessible.pdf
+        destination: software-security-code-of-practice.pdf
+        format: pdf

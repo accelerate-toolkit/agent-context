@@ -18,6 +18,13 @@ They should document how the shared principles apply locally without maintaining
 a second copy of the shared guidance. Existing consumers adopt new guidance only
 after installing a published release containing it.
 
+The bundled [develop-securely skill](packages/org-meta-bundle/.apm/skills/develop-securely/SKILL.md)
+supports proportionate security reasoning for applications, libraries and infrastructure.
+It loads relevant development, build and maintenance themes progressively, uses
+NCSC guidance as an attributed reference rather than a blanket compliance obligation,
+and encourages local skills for domain-specific technical guidance. Its reviewed, searchable Code of Practice reference ships with the skill;
+consumers do not need to download or extract the PDF.
+
 ## Onboard a Codex Workspace
 
 Run these commands from the repository where you want Codex to use the
@@ -248,3 +255,25 @@ installed by this workflow. Hydration uses the existing shared tool and download
 full upstream archives before selecting paths. The offline smoke check requires rg.
 
 See [hydration evidence](docs/frontend-hydration.md) for observed results and limits.
+
+## Preparing PDF references
+
+Maintainers can download the NCSC source using the existing hydrator with an
+explicit manifest (this manifest is not deployed to consumers):
+
+```sh
+uv run --script .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py --manifest scripts/reference-sources/ncsc-security.yml
+```
+
+Prepare a searchable reference locally with the PEP 723 script:
+
+```sh
+uv run --script scripts/extract_pdf_reference.py input.pdf output.md --title "Document title" --source-url https://publisher.example/document.pdf --edition "Publisher edition"
+```
+
+The script uses uv-provisioned pypdf, preserves page boundaries, creates a page
+index, and records source attribution and the PDF hash. It does not perform OCR.
+Review the extracted text against the PDF, retain source licensing in the adjacent
+`sources.md`, update the topic index, and commit the reviewed derivative with the
+skill. Run the script with `--help` for its interface. Originals remain in the local
+cache; extraction is an authoring action, not part of consumer hydration.

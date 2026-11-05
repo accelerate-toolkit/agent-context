@@ -1,5 +1,5 @@
 lockfile_version: '1'
-generated_at: '2026-11-05T11:25:28.783760+00:00'
+generated_at: '2026-11-05T22:05:21.133271+00:00'
 apm_version: 0.30.0
 dependencies:
 - repo_url: _local/frontend-react
@@ -30,6 +30,13 @@ dependencies:
   deployed_files:
   - .agents/skills/collaborate-cross-repos
   - .agents/skills/collaborate-cross-repos/SKILL.md
+  - .agents/skills/develop-securely
+  - .agents/skills/develop-securely/SKILL.md
+  - .agents/skills/develop-securely/references/design-and-development.md
+  - .agents/skills/develop-securely/references/maintenance-and-communication.md
+  - .agents/skills/develop-securely/references/ncsc-code-of-practice.md
+  - .agents/skills/develop-securely/references/source-and-build.md
+  - .agents/skills/develop-securely/references/sources.md
   - .agents/skills/use-apm
   - .agents/skills/use-apm/SKILL.md
   - .agents/skills/use-apm/cached-docs.yml
@@ -41,6 +48,12 @@ dependencies:
   - .agents/skills/work-on-gh-issues/scripts/list_issues.py
   deployed_file_hashes:
     .agents/skills/collaborate-cross-repos/SKILL.md: sha256:dea8d0226d6b54aef0fedb4e9079e0980955acf1e3da47e2fbd571181b92062d
+    .agents/skills/develop-securely/SKILL.md: sha256:b4f4e4e9358a49136731a080bba21f7496f8fea5b1e7a844e0d870db9c4e371d
+    .agents/skills/develop-securely/references/design-and-development.md: sha256:6d94e441f4aa383af4656594183b95951c63f79a95c771934cf68881a22e393a
+    .agents/skills/develop-securely/references/maintenance-and-communication.md: sha256:5c2f514d552e9fdd1d54ed73752c5560e8e0d63b62f34c018417fd3a293aa61e
+    .agents/skills/develop-securely/references/ncsc-code-of-practice.md: sha256:57a4ce21cb5a5f0b5deb25064bbdf97930255e582818c92c4b4a8f4c257475bd
+    .agents/skills/develop-securely/references/source-and-build.md: sha256:f92c6bd82a82e3288afd1e03d67570f37ed767732c0b1086ff7c5e67e0ee54d8
+    .agents/skills/develop-securely/references/sources.md: sha256:94b9e6ddb2ce1ef01249daf1f89c43c87b6dd10d831b93d6dfeb1daae2722e24
     .agents/skills/use-apm/SKILL.md: sha256:bb9b9f0ff7ca785449acadd7aa091c29bd73e5625b2bcac80e6c16ba99d4c80c
     .agents/skills/use-apm/cached-docs.yml: sha256:919a4ba9cd6d392dfbac636d4cd63fe51e86194c54d2e21ca8df40773cc782f3
     .agents/skills/use-cached-docs/SKILL.md: sha256:1a536633b653e9773a31a948d6976e5359617f64eee4e6deff6feeb378fc0b37
@@ -124,6 +137,69 @@ deployments:
   - ./packages/org-meta-bundle
   active_owner: ./packages/org-meta-bundle
   content_hash: sha256:dea8d0226d6b54aef0fedb4e9079e0980955acf1e3da47e2fbd571181b92062d
+- kind: project-relative
+  target: codex
+  value: .agents/skills/develop-securely
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/org-meta-bundle
+  active_owner: ./packages/org-meta-bundle
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/develop-securely/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/org-meta-bundle
+  active_owner: ./packages/org-meta-bundle
+  content_hash: sha256:b4f4e4e9358a49136731a080bba21f7496f8fea5b1e7a844e0d870db9c4e371d
+- kind: project-relative
+  target: codex
+  value: .agents/skills/develop-securely/references/design-and-development.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/org-meta-bundle
+  active_owner: ./packages/org-meta-bundle
+  content_hash: sha256:6d94e441f4aa383af4656594183b95951c63f79a95c771934cf68881a22e393a
+- kind: project-relative
+  target: codex
+  value: .agents/skills/develop-securely/references/maintenance-and-communication.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/org-meta-bundle
+  active_owner: ./packages/org-meta-bundle
+  content_hash: sha256:5c2f514d552e9fdd1d54ed73752c5560e8e0d63b62f34c018417fd3a293aa61e
+- kind: project-relative
+  target: codex
+  value: .agents/skills/develop-securely/references/ncsc-code-of-practice.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/org-meta-bundle
+  active_owner: ./packages/org-meta-bundle
+  content_hash: sha256:57a4ce21cb5a5f0b5deb25064bbdf97930255e582818c92c4b4a8f4c257475bd
+- kind: project-relative
+  target: codex
+  value: .agents/skills/develop-securely/references/source-and-build.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/org-meta-bundle
+  active_owner: ./packages/org-meta-bundle
+  content_hash: sha256:f92c6bd82a82e3288afd1e03d67570f37ed767732c0b1086ff7c5e67e0ee54d8
+- kind: project-relative
+  target: codex
+  value: .agents/skills/develop-securely/references/sources.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/org-meta-bundle
+  active_owner: ./packages/org-meta-bundle
+  content_hash: sha256:94b9e6ddb2ce1ef01249daf1f89c43c87b6dd10d831b93d6dfeb1daae2722e24
 - kind: project-relative
   target: codex
   value: .agents/skills/use-apm
