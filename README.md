@@ -11,7 +11,11 @@ implementation, testing and delivery: **Context**, **Feedback loops** and
 **Trajectory**. Read the
 [shared SDLC explanation](packages/org-meta-bundle/.apm/context/software-development-lifecycle.context.md).
 The concise instruction applies to all files and links to this packaged reference;
-APM rewrites the link when compiling consumer instructions.
+APM rewrites the link when compiling consumer instructions. The manual keeps
+requirements, delegation, evidence, specifications, contract publication and guidance
+adoption together in `org-meta-bundle`, with linked references for detailed work.
+We will iterate on those methods in this package before considering further splits.
+See [consolidation and migration](docs/sdlc-consolidation.md) for the adoption boundary.
 
 Projects retain their own requirements, acceptance journeys and delivery decisions.
 They should document how the shared principles apply locally without maintaining

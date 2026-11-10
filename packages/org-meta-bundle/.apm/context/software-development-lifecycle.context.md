@@ -97,19 +97,48 @@ the acceptance journey and smaller feedback loops, and assess whether the propos
 architecture and practices set a sustainable direction. Derive component work
 from that reasoning rather than allowing an inherited backlog to set the direction.
 
-## Requirement authority and acceptance layers
+## Responsibility layers and acceptance
 
-Identify the authoritative home for product requirements. When a product spans
-multiple component repositories, the product repository owns requirements at
-every level. Components reference and implement these requirements; they own
-technical design, contracts and tests, not independent behavioral requirements.
-New obligations or changes discovered during implementation return to the product
-owner for review. A single-repository project can keep these responsibilities
-together while preserving the distinction between requirements and implementation.
+Every layer owns requirements, architecture, delivery and acceptance within its
+scope. It can satisfy an obligation directly, decompose it or delegate delivery.
+The commissioning layer owns interfaces between the parts it commissions and
+accepts their combined outcome. Receiving layers own derived requirements,
+internal design and verification within their commissions. Changes to a
+commissioned obligation return to its definition authority.
 
-Product acceptance journeys demonstrate realised value. Component acceptance
-journeys live in their corresponding repositories and verify enabling capabilities.
-Setup is a prerequisite and measurable experience burden. Reusing setup must not
-hide its first-use cost. Trace component tests to central requirement IDs and
-record the product revision used; product acceptance still proves the integrated
-outcome rather than inferring it from component passes.
+One requirement has one definition authority and one accountable delivery owner.
+Split multi-party delivery into separately owned contributions before delegation.
+Direct satisfaction needs no duplicate child. Decompose only far enough to
+commission meaningful work; leave detailed specification to the receiving layer.
+Business provenance, technical subject and quality category do not create fixed
+hierarchy levels. Local context supplies parties, repositories and boundaries.
+
+Product acceptance demonstrates the integrated outcome. Component tests and
+conformity claims support it but do not replace the commissioning owner's
+assessment. Setup is a prerequisite and measurable experience burden; reusing it
+must not hide its first-use cost. Record evidence against the actual assigned
+requirements and contract revisions, preserving limitations and historical results.
+
+## Shared manual and local application
+
+The SDLC manual lives together in `org-meta-bundle`. Read the relevant reference
+when doing the corresponding work:
+
+- [Requirements, delegation and evidence](requirements.context.md): authoring,
+  ownership, registers, identity, assignments and satisfaction assessments.
+- [Specifications, contracts and acceptance](specifications.context.md): exchange
+  authority, edition compatibility, immutable baselines and acceptance boundaries.
+- [Specification change workflow](specification-change-workflow.context.md):
+  inspect, decide, prepare, validate, publish and hand off a coherent change.
+- [Engineering guidance and adoption](engineering-guidance.context.md): guidance
+  versus obligations, delivery measures, context updates and migration assessment.
+
+Consumer context identifies local parties, namespace, authoritative registers,
+acceptance journeys, tooling, artifact names and decisions. Keep those details
+local and refer to this manual for methods. This package does not install product
+requirements, validators, service implementations or live acceptance environments.
+
+When adopting this responsibility model from the earlier centralized model,
+reconcile authority and delegated scope explicitly. Preserve requirement IDs,
+published baselines and historical evidence; do not silently reassign work or
+claim migration complete from a successful context installation.

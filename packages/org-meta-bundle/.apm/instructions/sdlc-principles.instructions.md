@@ -30,3 +30,9 @@ Before SDLC planning or recommendations, read the
 [software development lifecycle](../context/software-development-lifecycle.context.md)
 for the maintained explanation. Establish how the consuming project applies these
 principles using its own requirements, acceptance journeys and delivery context.
+
+Use the linked manual references for requirement decomposition and evidence,
+specification/contract changes, publication handoffs and guidance adoption.
+Each responsibility layer owns derived requirements within its commission;
+changes to commissioned obligations return to their definition authority.
+Keep initiative-specific parties, assignments, decisions and evidence in local context.
