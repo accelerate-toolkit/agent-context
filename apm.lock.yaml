@@ -1,7 +1,20 @@
 lockfile_version: '1'
-generated_at: '2026-11-05T22:12:44.315665+00:00'
+generated_at: '2026-11-10T18:05:44.892404+00:00'
 apm_version: 0.30.0
 dependencies:
+- repo_url: _local/fake-external-services
+  name: fake-external-services
+  version: 0.9.0
+  package_type: apm_package
+  deployed_files:
+  - .agents/skills/fake-external-services
+  - .agents/skills/fake-external-services/SKILL.md
+  deployed_file_hashes:
+    .agents/skills/fake-external-services/SKILL.md: sha256:b1eca792bbd44ed7d6ed967894c1ed6113c1f938bf5f9f8bdc0d97305cea69de
+  source: local
+  local_path: ./packages/fake-external-services
+  is_dev: true
+  declared_license: MIT
 - repo_url: _local/frontend-react
   name: frontend-react
   version: 0.9.0
@@ -124,6 +137,24 @@ deployments:
   - ./packages/org-meta-bundle
   active_owner: ./packages/org-meta-bundle
   content_hash: sha256:dea8d0226d6b54aef0fedb4e9079e0980955acf1e3da47e2fbd571181b92062d
+- kind: project-relative
+  target: codex
+  value: .agents/skills/fake-external-services
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/fake-external-services
+  active_owner: ./packages/fake-external-services
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/fake-external-services/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/fake-external-services
+  active_owner: ./packages/fake-external-services
+  content_hash: sha256:b1eca792bbd44ed7d6ed967894c1ed6113c1f938bf5f9f8bdc0d97305cea69de
 - kind: project-relative
   target: codex
   value: .agents/skills/use-apm

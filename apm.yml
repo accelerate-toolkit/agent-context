@@ -9,6 +9,7 @@ devDependencies:
   apm:
     - path: ./packages/org-meta-bundle
     - path: ./packages/frontend-react
+    - path: ./packages/fake-external-services
 scripts:
   hydrate-cached-docs: uv run .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py
 
@@ -30,5 +31,10 @@ marketplace:
     - name: frontend-react
       source: accelerate-toolkit/agent-context
       subdir: packages/frontend-react
+      version: 0.9.0
+      category: Development
+    - name: fake-external-services
+      source: accelerate-toolkit/agent-context
+      subdir: packages/fake-external-services
       version: 0.9.0
       category: Development
