@@ -1,10 +1,10 @@
 lockfile_version: '1'
-generated_at: '2026-11-10T22:30:29.520020+00:00'
+generated_at: '2026-11-10T22:35:22.512627+00:00'
 apm_version: 0.30.0
 dependencies:
 - repo_url: _local/fake-external-services
   name: fake-external-services
-  version: 0.13.0
+  version: 0.14.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/fake-external-services
@@ -19,7 +19,7 @@ dependencies:
   declared_license: MIT
 - repo_url: _local/frontend-react
   name: frontend-react
-  version: 0.13.0
+  version: 0.14.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/build-static-react
@@ -40,7 +40,7 @@ dependencies:
   declared_license: MIT
 - repo_url: _local/org-meta-bundle
   name: org-meta-bundle
-  version: 0.13.0
+  version: 0.14.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/collaborate-cross-repos
@@ -68,7 +68,7 @@ dependencies:
   declared_license: MIT
 - repo_url: _local/work-with-requirements
   name: work-with-requirements
-  version: 0.13.0
+  version: 0.14.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/assess-requirement-evidence
