@@ -8,45 +8,45 @@
     {
       "name": "org-meta-bundle",
       "description": "Shared SDLC principles and organization-wide Codex workflows for APM, cached documentation, and GitHub collaboration.",
-      "version": "0.14.0",
+      "version": "0.15.0",
       "source": {
         "source": "git-subdir",
         "url": "accelerate-toolkit/agent-context",
         "path": "packages/org-meta-bundle",
-        "ref": "v0.14.0"
+        "ref": "v0.15.0"
       }
     },
     {
       "name": "frontend-react",
       "description": "Minimal static React applications with reviewed dependencies and pinned official documentation.",
-      "version": "0.14.0",
+      "version": "0.15.0",
       "source": {
         "source": "git-subdir",
         "url": "accelerate-toolkit/agent-context",
         "path": "packages/frontend-react",
-        "ref": "v0.14.0"
+        "ref": "v0.15.0"
       }
     },
     {
       "name": "fake-external-services",
       "description": "Contract-faithful external service fakes for component test harnesses.",
-      "version": "0.14.0",
+      "version": "0.15.0",
       "source": {
         "source": "git-subdir",
         "url": "accelerate-toolkit/agent-context",
         "path": "packages/fake-external-services",
-        "ref": "v0.14.0"
+        "ref": "v0.15.0"
       }
     },
     {
       "name": "work-with-requirements",
       "description": "Requirements definition, decomposition, allocation, verification planning, evidence assessment and visualisation.",
-      "version": "0.14.0",
+      "version": "0.15.0",
       "source": {
         "source": "git-subdir",
         "url": "accelerate-toolkit/agent-context",
         "path": "packages/work-with-requirements",
-        "ref": "v0.14.0"
+        "ref": "v0.15.0"
       }
     }
   ]
