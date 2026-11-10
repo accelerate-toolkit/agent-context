@@ -5,12 +5,13 @@ material rather than creating competing definitions. Product context and compone
 implementation details can live in different repositories while remaining connected
 through explicit references. Actual repository roles belong in local context.
 
-## Move, distill and archive
+## Move, distill and retire
 
 A move changes the authoritative location; inspect callers and update affected
 references. A distillation produces an accurate current document from source
-material while preserving the historical evidence behind it. Archiving retains
-material in its historical context instead of presenting it as current guidance.
+material while preserving the historical evidence behind it. Retiring a working document preserves useful conclusions and evidence in their
+maintained homes before removal; Git retains its history. No archive directory
+is required. Use `maintain-repo-docs` for document placement and lifecycle.
 
 Preserve reviewed meaning, rationale, uncertainty and source attribution during
 these operations. Do not turn an observation or an unaccepted proposal into a
@@ -57,8 +58,8 @@ where current navigation should follow it. A new commit elsewhere in a repositor
 does not establish that the cited document changed.
 
 A deleted or inaccessible revision means the evidence cannot currently be retrieved.
-Preserve needed evidence through the agreed archive rather than assuming rewritten
-source history will remain recoverable. Do not restore purged material or old Git
+Preserve needed evidence in an agreed retained location rather than assuming
+rewritten source history will remain recoverable. Do not restore purged material or old Git
 history merely to repair a reference.
 
 Links convey location, not permission. Access to a referring repository does not

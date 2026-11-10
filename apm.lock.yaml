@@ -1,10 +1,10 @@
 lockfile_version: '1'
-generated_at: '2026-11-10T22:35:22.512627+00:00'
+generated_at: '2026-11-10T23:06:12.974649+00:00'
 apm_version: 0.30.0
 dependencies:
 - repo_url: _local/fake-external-services
   name: fake-external-services
-  version: 0.14.0
+  version: 0.13.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/fake-external-services
@@ -19,7 +19,7 @@ dependencies:
   declared_license: MIT
 - repo_url: _local/frontend-react
   name: frontend-react
-  version: 0.14.0
+  version: 0.13.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/build-static-react
@@ -40,11 +40,14 @@ dependencies:
   declared_license: MIT
 - repo_url: _local/org-meta-bundle
   name: org-meta-bundle
-  version: 0.14.0
+  version: 0.13.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/collaborate-cross-repos
   - .agents/skills/collaborate-cross-repos/SKILL.md
+  - .agents/skills/maintain-repo-docs
+  - .agents/skills/maintain-repo-docs/SKILL.md
+  - .agents/skills/maintain-repo-docs/references/document-types.md
   - .agents/skills/use-apm
   - .agents/skills/use-apm/SKILL.md
   - .agents/skills/use-apm/cached-docs.yml
@@ -56,6 +59,8 @@ dependencies:
   - .agents/skills/work-on-gh-issues/scripts/list_issues.py
   deployed_file_hashes:
     .agents/skills/collaborate-cross-repos/SKILL.md: sha256:d601264bb3d1333b304f96c45b066a5dbfef31fd45feb5492c8d633c6bd336f9
+    .agents/skills/maintain-repo-docs/SKILL.md: sha256:db70cfc5854bd27fe0349c3bb0ca8fe818a299929ecde0e2018454f764202855
+    .agents/skills/maintain-repo-docs/references/document-types.md: sha256:bcef82d0a0b988423c343280c2bb92b31a80f576293513548c6a2b5e885719cf
     .agents/skills/use-apm/SKILL.md: sha256:a3edc85a40258f9ea8030e493bb008fe5e3d36fda5458658c2aa33dcef324411
     .agents/skills/use-apm/cached-docs.yml: sha256:919a4ba9cd6d392dfbac636d4cd63fe51e86194c54d2e21ca8df40773cc782f3
     .agents/skills/use-cached-docs/SKILL.md: sha256:fd040b99fd64d195a074a07faee6b80fc6905667484bd9286a7d7174e2ab0de1
@@ -68,7 +73,7 @@ dependencies:
   declared_license: MIT
 - repo_url: _local/work-with-requirements
   name: work-with-requirements
-  version: 0.14.0
+  version: 0.13.0
   package_type: apm_package
   deployed_files:
   - .agents/skills/assess-requirement-evidence
@@ -321,6 +326,33 @@ deployments:
   - ./packages/fake-external-services
   active_owner: ./packages/fake-external-services
   content_hash: sha256:64efeec030e87625e81cf1bcb926d426da384dd0a075bf9edcd83296b64514c0
+- kind: project-relative
+  target: codex
+  value: .agents/skills/maintain-repo-docs
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/org-meta-bundle
+  active_owner: ./packages/org-meta-bundle
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/maintain-repo-docs/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/org-meta-bundle
+  active_owner: ./packages/org-meta-bundle
+  content_hash: sha256:db70cfc5854bd27fe0349c3bb0ca8fe818a299929ecde0e2018454f764202855
+- kind: project-relative
+  target: codex
+  value: .agents/skills/maintain-repo-docs/references/document-types.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/org-meta-bundle
+  active_owner: ./packages/org-meta-bundle
+  content_hash: sha256:bcef82d0a0b988423c343280c2bb92b31a80f576293513548c6a2b5e885719cf
 - kind: project-relative
   target: codex
   value: .agents/skills/plan-requirement-verification

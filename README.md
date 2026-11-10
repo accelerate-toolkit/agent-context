@@ -214,7 +214,13 @@ you to run `make apm-install`. The reminder performs no upstream check or update
 - `packages/frontend-react/` provides optional static React guidance and pinned official references; see its [adoption notes](packages/frontend-react/README.md).
 - `packages/fake-external-services/` provides optional service-fake guidance; see its [adoption notes](packages/fake-external-services/README.md).
 - `packages/work-with-requirements/` provides requirements workflows and visualisation guidance; see its [adoption notes](packages/work-with-requirements/README.md).
-- `packages/org-meta-bundle/` provides the organization-wide Codex workflows.
+- `packages/org-meta-bundle/` provides the organization-wide Codex workflows,
+  including [maintain-repo-docs](packages/org-meta-bundle/.apm/skills/maintain-repo-docs/SKILL.md)
+  for creating and changing repository documentation. Its
+  [navigation instructions](packages/org-meta-bundle/.apm/instructions/repository-docs.instructions.md)
+  define document homes and route maintenance to the skill. Existing consumers
+  adopt this guidance through a published package update; editing this checkout
+  does not reorganise their documentation.
 - `.agent-cache/` is generated local documentation state.
 
 ## Maintain This Repository

@@ -18,17 +18,20 @@ its recorded conditions, not a later architecture, broader capability or product
 readiness. Structural validation alone may not establish that a generated result
 preserves intended meaning; compare against the reviewed baseline where relevant.
 
-Bring useful conclusions into maintained product or component context. Keep full
-reports and bulky experimental artifacts in their owning research/archive location
-with retrievable citations. Retiring an investigation does not mean discarding its
+Bring useful conclusions into maintained product or component context. Keep research with the plan or WIP it supports, and retain useful observations
+and reports in evidence with retrievable artifact citations. No dedicated research
+or archive directory is required. Retiring an investigation does not mean discarding its
 reasoning. Historical scripts are records; do not claim their environments still
 run or require replay simply to understand the conclusion. Reproduction, when
 needed, is a separately scoped activity with its own prerequisites.
 
 ## Record decisions and their limits
 
-An architecture decision record captures the decision, rationale, alternatives
-and consequences, and links to maintained design detail. State its status and
+An architecture decision record captures the decision rationale, briefly describes
+the options actually assessed and their assessment, and states the resulting change
+and consequences. Link a subject-named design document when the resulting system
+needs more detail; a small decision can be self-contained. Use a stable sequential
+index plus topic name for the ADR filename. State its status and
 scope so readers can distinguish a proposal from an accepted choice. Acceptance
 of an ADR does not accept every proposal in a linked design or establish that the
 choice has been implemented or verified.

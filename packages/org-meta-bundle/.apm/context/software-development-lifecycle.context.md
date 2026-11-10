@@ -135,11 +135,11 @@ installed skill and reference when doing the corresponding work:
 - [Engineering guidance and adoption](engineering-guidance.context.md): guidance
   versus obligations, delivery measures, context updates and migration assessment.
 - [Maintained knowledge and references](knowledge-maintenance.context.md): moves,
-  distillation, archival, current navigation and historical citations.
+  distillation, retirement, current navigation and historical citations.
 - [Component delivery and product assembly](assembly-and-deployment.context.md):
   artifact handoff, sandbox isolation, candidate assemblies and deployed state.
 - [Roadmaps and milestone plans](roadmaps-and-milestones.context.md): outcome-led
-  sequencing, active plans and evidence-based progress updates.
+  sequencing, plan-to-WIP transitions and evidence-based progress updates.
 - [Research evidence and architecture decisions](research-and-decisions.context.md):
   investigations, conclusions, decision scope and supersession.
 
