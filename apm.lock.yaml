@@ -1,5 +1,5 @@
 lockfile_version: '1'
-generated_at: '2026-11-10T18:30:04.754979+00:00'
+generated_at: '2026-11-10T18:48:45.580297+00:00'
 apm_version: 0.30.0
 dependencies:
 - repo_url: _local/fake-external-services
@@ -9,8 +9,10 @@ dependencies:
   deployed_files:
   - .agents/skills/fake-external-services
   - .agents/skills/fake-external-services/SKILL.md
+  - .agents/skills/fake-external-services/references/development-fake-blueprint.md
   deployed_file_hashes:
-    .agents/skills/fake-external-services/SKILL.md: sha256:b1eca792bbd44ed7d6ed967894c1ed6113c1f938bf5f9f8bdc0d97305cea69de
+    .agents/skills/fake-external-services/SKILL.md: sha256:c418233210f0d07df7e8372b8c7fcb4eb916f7a21f54be5c351e6796569a7dac
+    .agents/skills/fake-external-services/references/development-fake-blueprint.md: sha256:64efeec030e87625e81cf1bcb926d426da384dd0a075bf9edcd83296b64514c0
   source: local
   local_path: ./packages/fake-external-services
   is_dev: true
@@ -154,7 +156,16 @@ deployments:
   owners:
   - ./packages/fake-external-services
   active_owner: ./packages/fake-external-services
-  content_hash: sha256:b1eca792bbd44ed7d6ed967894c1ed6113c1f938bf5f9f8bdc0d97305cea69de
+  content_hash: sha256:c418233210f0d07df7e8372b8c7fcb4eb916f7a21f54be5c351e6796569a7dac
+- kind: project-relative
+  target: codex
+  value: .agents/skills/fake-external-services/references/development-fake-blueprint.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/fake-external-services
+  active_owner: ./packages/fake-external-services
+  content_hash: sha256:64efeec030e87625e81cf1bcb926d426da384dd0a075bf9edcd83296b64514c0
 - kind: project-relative
   target: codex
   value: .agents/skills/use-apm

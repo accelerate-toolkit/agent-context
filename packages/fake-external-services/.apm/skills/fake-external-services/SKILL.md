@@ -1,6 +1,6 @@
 ---
 name: fake-external-services
-description: Design, implement, or review external service fakes in a component test harness, including protocol fidelity, state, fault injection, and checks against the real dependency. Use for service-boundary testing, not ordinary in-process unit mocks.
+description: Design, implement, or review external service fakes in a component test harness, including protocol fidelity, state, fault injection, human control UIs, live inspectors, and checks against the real dependency. Use for service-boundary testing, not ordinary in-process unit mocks.
 ---
 
 # Fake external services
@@ -9,7 +9,19 @@ Build the smallest fake that supports the component's acceptance scenarios at th
 real dependency boundary. Keep it in the consuming component's test harness,
 alongside its scenarios and fidelity checks, unless the project already has an
 explicit shared ownership model. A fake does not inherently need a separate
-published artifact or a prescribed framework.
+published artifact or a prescribed framework. Derive entities, controls and views
+from the external service's consumed contract. No identity, messaging, storage or
+other domain model is implied by this skill.
+
+## Build a usable development fake
+
+For a manually usable fake, read the [development fake blueprint](references/development-fake-blueprint.md)
+before designing its runtime and UI. Reproduce the Current state/Events layout,
+distinct development identity, live interaction behavior and lifecycle guarantees
+using the project's preferred language and tools. Treat visual clarity and manual
+operation as deliverables alongside protocol fidelity; verify the running UI with
+the blueprint's observable checklist. An explicitly headless fixture can omit the
+browser UI while retaining the applicable state, control and inspection semantics.
 
 ## Establish the boundary and scenarios
 
