@@ -1,6 +1,8 @@
 # SDLC consolidation and migration
 
-Status: prepared source change, not a published or adopted release. The shared
+Status: the initial consolidation shipped in v0.11.0. The additional references
+for knowledge maintenance, assembly, planning and research are prepared source
+changes, not yet published. Consumer adoption is separate from either publication. The shared
 manual is consolidated in `org-meta-bundle` so it can evolve in one place.
 This supersedes the package-splitting prerequisite in issue #3 for this work;
 independent release streams and a separate migration skill are not implemented
@@ -16,6 +18,10 @@ The optional fake-external-services package retains its published entry point.
 | Technical contracts, compatibility, editions, assignments and acceptance | [Specifications](../packages/org-meta-bundle/.apm/context/specifications.context.md) |
 | Clarification, validation, immutable publication and cross-repository handoff | [Change workflow](../packages/org-meta-bundle/.apm/context/specification-change-workflow.context.md) |
 | Adopted obligations, delivery measurements, guidance upgrades and trajectory changes | [Guidance adoption](../packages/org-meta-bundle/.apm/context/engineering-guidance.context.md) |
+| Moves, distillation, archival and reference provenance | [Knowledge maintenance](../packages/org-meta-bundle/.apm/context/knowledge-maintenance.context.md) |
+| Artifact handoff, sandbox isolation and deployed assembly identity | [Assembly and deployment](../packages/org-meta-bundle/.apm/context/assembly-and-deployment.context.md) |
+| Outcome-led roadmaps, active milestone plans and feedback updates | [Roadmaps and milestones](../packages/org-meta-bundle/.apm/context/roadmaps-and-milestones.context.md) |
+| Question-driven research, evidence limits and decision supersession | [Research and decisions](../packages/org-meta-bundle/.apm/context/research-and-decisions.context.md) |
 
 Consumer-specific names, IDs, repositories, issue assignments, deployment details,
 acceptance prompts, waivers and one-time history corrections are excluded. Examples
