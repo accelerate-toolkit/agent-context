@@ -10,6 +10,7 @@ devDependencies:
     - path: ./packages/org-meta-bundle
     - path: ./packages/frontend-react
     - path: ./packages/fake-external-services
+    - path: ./packages/work-with-requirements
 scripts:
   hydrate-cached-docs: uv run .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py
 
@@ -36,5 +37,10 @@ marketplace:
     - name: fake-external-services
       source: accelerate-toolkit/agent-context
       subdir: packages/fake-external-services
+      version: 0.13.0
+      category: Development
+    - name: work-with-requirements
+      source: accelerate-toolkit/agent-context
+      subdir: packages/work-with-requirements
       version: 0.13.0
       category: Development

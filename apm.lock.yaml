@@ -1,5 +1,5 @@
 lockfile_version: '1'
-generated_at: '2026-11-10T18:49:44.947102+00:00'
+generated_at: '2026-11-10T22:30:29.520020+00:00'
 apm_version: 0.30.0
 dependencies:
 - repo_url: _local/fake-external-services
@@ -11,7 +11,7 @@ dependencies:
   - .agents/skills/fake-external-services/SKILL.md
   - .agents/skills/fake-external-services/references/development-fake-blueprint.md
   deployed_file_hashes:
-    .agents/skills/fake-external-services/SKILL.md: sha256:c418233210f0d07df7e8372b8c7fcb4eb916f7a21f54be5c351e6796569a7dac
+    .agents/skills/fake-external-services/SKILL.md: sha256:9c815f95ac885915f30655de0b254a1dabf32c31406bfa39b9b59ddc0b46104f
     .agents/skills/fake-external-services/references/development-fake-blueprint.md: sha256:64efeec030e87625e81cf1bcb926d426da384dd0a075bf9edcd83296b64514c0
   source: local
   local_path: ./packages/fake-external-services
@@ -29,7 +29,7 @@ dependencies:
   - .agents/skills/build-static-react/references/documentation.md
   - .agents/skills/build-static-react/references/security.md
   deployed_file_hashes:
-    .agents/skills/build-static-react/SKILL.md: sha256:ad32c3a487ceb0904b8f13b5150b30dcc00c9c7c0d512681d6ceef66da23ba13
+    .agents/skills/build-static-react/SKILL.md: sha256:aa62403b73a59944aa5db378ac095a62a487f76c5100bca94f0e9788841ea6a9
     .agents/skills/build-static-react/cached-docs.yml: sha256:f7781f7c8b1ac68a595ef4f1126e36db2ff99cd36482cb999ef14ea303d53aa9
     .agents/skills/build-static-react/references/delivery.md: sha256:e223171f9e1d6079b3c7fe2cafd232c37011cfcb4fa77da2710b47046211319b
     .agents/skills/build-static-react/references/documentation.md: sha256:d748c5fae41517f185bef87aca55843c9fb4685225b1c800b10d80278b4d4705
@@ -55,18 +55,74 @@ dependencies:
   - .agents/skills/work-on-gh-issues/SKILL.md
   - .agents/skills/work-on-gh-issues/scripts/list_issues.py
   deployed_file_hashes:
-    .agents/skills/collaborate-cross-repos/SKILL.md: sha256:dea8d0226d6b54aef0fedb4e9079e0980955acf1e3da47e2fbd571181b92062d
-    .agents/skills/use-apm/SKILL.md: sha256:bb9b9f0ff7ca785449acadd7aa091c29bd73e5625b2bcac80e6c16ba99d4c80c
+    .agents/skills/collaborate-cross-repos/SKILL.md: sha256:d601264bb3d1333b304f96c45b066a5dbfef31fd45feb5492c8d633c6bd336f9
+    .agents/skills/use-apm/SKILL.md: sha256:a3edc85a40258f9ea8030e493bb008fe5e3d36fda5458658c2aa33dcef324411
     .agents/skills/use-apm/cached-docs.yml: sha256:919a4ba9cd6d392dfbac636d4cd63fe51e86194c54d2e21ca8df40773cc782f3
-    .agents/skills/use-cached-docs/SKILL.md: sha256:1a536633b653e9773a31a948d6976e5359617f64eee4e6deff6feeb378fc0b37
+    .agents/skills/use-cached-docs/SKILL.md: sha256:fd040b99fd64d195a074a07faee6b80fc6905667484bd9286a7d7174e2ab0de1
     .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py: sha256:858058d3f0f39a13d16deb07627efd7dff2a2668717e2f5c56ac963914d77dcf
-    .agents/skills/work-on-gh-issues/SKILL.md: sha256:5ca4ae82b103cb227d98e2e2f0d1f20940061863cfa6fbbf98500dea7f804f5f
+    .agents/skills/work-on-gh-issues/SKILL.md: sha256:064d41afe0d2090bfaec462d415d2fd40a958aff51b63ce6927f28e28e65706f
     .agents/skills/work-on-gh-issues/scripts/list_issues.py: sha256:209a25da96cb36d47b51334ba22338701085324f1d834ce82d56aa015e86c725
   source: local
   local_path: ./packages/org-meta-bundle
   is_dev: true
   declared_license: MIT
+- repo_url: _local/work-with-requirements
+  name: work-with-requirements
+  version: 0.13.0
+  package_type: apm_package
+  deployed_files:
+  - .agents/skills/assess-requirement-evidence
+  - .agents/skills/assess-requirement-evidence/SKILL.md
+  - .agents/skills/change-requirements-and-contracts
+  - .agents/skills/change-requirements-and-contracts/SKILL.md
+  - .agents/skills/decompose-and-allocate-requirements
+  - .agents/skills/decompose-and-allocate-requirements/SKILL.md
+  - .agents/skills/define-requirements
+  - .agents/skills/define-requirements/SKILL.md
+  - .agents/skills/define-requirements/references/component-model.md
+  - .agents/skills/define-requirements/references/requirements.context.md
+  - .agents/skills/define-requirements/references/specification-change-workflow.context.md
+  - .agents/skills/define-requirements/references/specifications.context.md
+  - .agents/skills/define-requirements/references/verification-planning.md
+  - .agents/skills/plan-requirement-verification
+  - .agents/skills/plan-requirement-verification/SKILL.md
+  - .agents/skills/visualize-requirements
+  - .agents/skills/visualize-requirements/SKILL.md
+  deployed_file_hashes:
+    .agents/skills/assess-requirement-evidence/SKILL.md: sha256:aa79c9271214cd5ccd7a23f96133581a2f818d02f9c69dc1b30be25a08dfa2d3
+    .agents/skills/change-requirements-and-contracts/SKILL.md: sha256:74f06b198a00840c1718138f400565efe8a8b3d4a6c75eccebd550371056e386
+    .agents/skills/decompose-and-allocate-requirements/SKILL.md: sha256:fa357eac420a74fdaa1f3a7361972c8161a123235405f8ed823f133434960731
+    .agents/skills/define-requirements/SKILL.md: sha256:96b084400387254f0cde7028efc08f92471daa2052d6783e413d18aadff82bad
+    .agents/skills/define-requirements/references/component-model.md: sha256:5ad4f792f838a632fb8bdd65faece517bb50f616add39a99f01e70f5eb75a683
+    .agents/skills/define-requirements/references/requirements.context.md: sha256:2940872f519b591a194785bb4f2827563edf8848b441c5763a7bb07133dbe26f
+    .agents/skills/define-requirements/references/specification-change-workflow.context.md: sha256:5046565251da4716ce5b865884fe5a5db34f3702e9bae5bceb66c8bfa6eae349
+    .agents/skills/define-requirements/references/specifications.context.md: sha256:6c8db5e6ce3cd1b98f3807a10848279fc91558964216ee7386784e8542eda3cb
+    .agents/skills/define-requirements/references/verification-planning.md: sha256:2e6958c297c74a39cf0fdaa7a82367d0f0e576385950ac1c88b8a6ed455d5025
+    .agents/skills/plan-requirement-verification/SKILL.md: sha256:391b8f8d146c5662ef7540fc5eb1dc05c840c09dbb63954724c38fe31d0ccfea
+    .agents/skills/visualize-requirements/SKILL.md: sha256:15afc5203f1dabb31cac36cb3c960b975f3f24709a7eed346ce7a5da2dee2ff6
+  source: local
+  local_path: ./packages/work-with-requirements
+  is_dev: true
+  declared_license: MIT
 deployments:
+- kind: project-relative
+  target: codex
+  value: .agents/skills/assess-requirement-evidence
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/assess-requirement-evidence/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: sha256:aa79c9271214cd5ccd7a23f96133581a2f818d02f9c69dc1b30be25a08dfa2d3
 - kind: project-relative
   target: codex
   value: .agents/skills/build-static-react
@@ -84,7 +140,7 @@ deployments:
   owners:
   - ./packages/frontend-react
   active_owner: ./packages/frontend-react
-  content_hash: sha256:ad32c3a487ceb0904b8f13b5150b30dcc00c9c7c0d512681d6ceef66da23ba13
+  content_hash: sha256:aa62403b73a59944aa5db378ac095a62a487f76c5100bca94f0e9788841ea6a9
 - kind: project-relative
   target: codex
   value: .agents/skills/build-static-react/cached-docs.yml
@@ -123,6 +179,24 @@ deployments:
   content_hash: sha256:46a0ac93f6e8a8c10eca2f87a09e68a7809852a72a530413119367364bf39486
 - kind: project-relative
   target: codex
+  value: .agents/skills/change-requirements-and-contracts
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/change-requirements-and-contracts/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: sha256:74f06b198a00840c1718138f400565efe8a8b3d4a6c75eccebd550371056e386
+- kind: project-relative
+  target: codex
   value: .agents/skills/collaborate-cross-repos
   runtime: null
   scope: project
@@ -138,7 +212,88 @@ deployments:
   owners:
   - ./packages/org-meta-bundle
   active_owner: ./packages/org-meta-bundle
-  content_hash: sha256:dea8d0226d6b54aef0fedb4e9079e0980955acf1e3da47e2fbd571181b92062d
+  content_hash: sha256:d601264bb3d1333b304f96c45b066a5dbfef31fd45feb5492c8d633c6bd336f9
+- kind: project-relative
+  target: codex
+  value: .agents/skills/decompose-and-allocate-requirements
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/decompose-and-allocate-requirements/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: sha256:fa357eac420a74fdaa1f3a7361972c8161a123235405f8ed823f133434960731
+- kind: project-relative
+  target: codex
+  value: .agents/skills/define-requirements
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/define-requirements/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: sha256:96b084400387254f0cde7028efc08f92471daa2052d6783e413d18aadff82bad
+- kind: project-relative
+  target: codex
+  value: .agents/skills/define-requirements/references/component-model.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: sha256:5ad4f792f838a632fb8bdd65faece517bb50f616add39a99f01e70f5eb75a683
+- kind: project-relative
+  target: codex
+  value: .agents/skills/define-requirements/references/requirements.context.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: sha256:2940872f519b591a194785bb4f2827563edf8848b441c5763a7bb07133dbe26f
+- kind: project-relative
+  target: codex
+  value: .agents/skills/define-requirements/references/specification-change-workflow.context.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: sha256:5046565251da4716ce5b865884fe5a5db34f3702e9bae5bceb66c8bfa6eae349
+- kind: project-relative
+  target: codex
+  value: .agents/skills/define-requirements/references/specifications.context.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: sha256:6c8db5e6ce3cd1b98f3807a10848279fc91558964216ee7386784e8542eda3cb
+- kind: project-relative
+  target: codex
+  value: .agents/skills/define-requirements/references/verification-planning.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: sha256:2e6958c297c74a39cf0fdaa7a82367d0f0e576385950ac1c88b8a6ed455d5025
 - kind: project-relative
   target: codex
   value: .agents/skills/fake-external-services
@@ -156,7 +311,7 @@ deployments:
   owners:
   - ./packages/fake-external-services
   active_owner: ./packages/fake-external-services
-  content_hash: sha256:c418233210f0d07df7e8372b8c7fcb4eb916f7a21f54be5c351e6796569a7dac
+  content_hash: sha256:9c815f95ac885915f30655de0b254a1dabf32c31406bfa39b9b59ddc0b46104f
 - kind: project-relative
   target: codex
   value: .agents/skills/fake-external-services/references/development-fake-blueprint.md
@@ -166,6 +321,24 @@ deployments:
   - ./packages/fake-external-services
   active_owner: ./packages/fake-external-services
   content_hash: sha256:64efeec030e87625e81cf1bcb926d426da384dd0a075bf9edcd83296b64514c0
+- kind: project-relative
+  target: codex
+  value: .agents/skills/plan-requirement-verification
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/plan-requirement-verification/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: sha256:391b8f8d146c5662ef7540fc5eb1dc05c840c09dbb63954724c38fe31d0ccfea
 - kind: project-relative
   target: codex
   value: .agents/skills/use-apm
@@ -183,7 +356,7 @@ deployments:
   owners:
   - ./packages/org-meta-bundle
   active_owner: ./packages/org-meta-bundle
-  content_hash: sha256:bb9b9f0ff7ca785449acadd7aa091c29bd73e5625b2bcac80e6c16ba99d4c80c
+  content_hash: sha256:a3edc85a40258f9ea8030e493bb008fe5e3d36fda5458658c2aa33dcef324411
 - kind: project-relative
   target: codex
   value: .agents/skills/use-apm/cached-docs.yml
@@ -210,7 +383,7 @@ deployments:
   owners:
   - ./packages/org-meta-bundle
   active_owner: ./packages/org-meta-bundle
-  content_hash: sha256:1a536633b653e9773a31a948d6976e5359617f64eee4e6deff6feeb378fc0b37
+  content_hash: sha256:fd040b99fd64d195a074a07faee6b80fc6905667484bd9286a7d7174e2ab0de1
 - kind: project-relative
   target: codex
   value: .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py
@@ -220,6 +393,24 @@ deployments:
   - ./packages/org-meta-bundle
   active_owner: ./packages/org-meta-bundle
   content_hash: sha256:858058d3f0f39a13d16deb07627efd7dff2a2668717e2f5c56ac963914d77dcf
+- kind: project-relative
+  target: codex
+  value: .agents/skills/visualize-requirements
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/visualize-requirements/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - ./packages/work-with-requirements
+  active_owner: ./packages/work-with-requirements
+  content_hash: sha256:15afc5203f1dabb31cac36cb3c960b975f3f24709a7eed346ce7a5da2dee2ff6
 - kind: project-relative
   target: codex
   value: .agents/skills/work-on-gh-issues
@@ -237,7 +428,7 @@ deployments:
   owners:
   - ./packages/org-meta-bundle
   active_owner: ./packages/org-meta-bundle
-  content_hash: sha256:5ca4ae82b103cb227d98e2e2f0d1f20940061863cfa6fbbf98500dea7f804f5f
+  content_hash: sha256:064d41afe0d2090bfaec462d415d2fd40a958aff51b63ce6927f28e28e65706f
 - kind: project-relative
   target: codex
   value: .agents/skills/work-on-gh-issues/scripts/list_issues.py

@@ -51,12 +51,12 @@ This guidance does not introduce a universal serverless mandate.
 
 ## Versioned engineering context
 
-Keep the shared SDLC manual in `org-meta-bundle` and iterate on it there.
-Requirements, architecture guidance, assessment and delivery methods can use
-separate reference files within the same package; this does not create separate
-adoption or release streams. Retain the repository's existing lockstep release
-process. Splitting packages or introducing independent version streams requires
-a later explicit decision, not completion as a prerequisite to this consolidation.
+Keep Context, Feedback loops, Trajectory and guidance adoption in
+`org-meta-bundle`. The separately selectable `work-with-requirements` package
+owns the detailed requirements, contracts, verification planning and assessment
+methods. Its skills share one maintained model. Preserve the repository's
+lockstep release process; separate installation does not imply independent
+version streams.
 
 Consumers pin accepted releases and commit resolved lockfiles. Preserve source
 artifact, owning package and version attribution in installed context and change

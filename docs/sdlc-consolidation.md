@@ -1,5 +1,31 @@
 # SDLC consolidation and migration
 
+## Requirements package extraction
+
+The current source extracts detailed requirements, specifications and change
+workflows into `packages/work-with-requirements`, with six skills sharing references
+under `define-requirements/references/`. The original context paths retain adoption
+pointers. This supersedes the earlier decision to defer splitting these methods;
+Context, Feedback loops and Trajectory remain in `org-meta-bundle`.
+
+The new component model separates received intent, local requirement derivation
+layers, allocation by unchanged IDs, interfaces, and verification planning.
+Actual evidence assessment has a separate skill. Existing IDs, authority and
+published baselines remain unchanged.
+
+The owner classifies this extraction as a feature release without a breaking
+change designation. Consumers relying on the extracted methods must explicitly
+add the new package at a published immutable release and update references to
+the installed skills. Preserve assignments and historical evidence; review plan
+coverage without treating it as actual satisfaction. Lockstep version planning
+remains automatic; no release or consumer adoption is claimed by these source
+edits. This classification does not change the general compatibility policy.
+
+The content map below records the previous consolidated locations, now adoption
+pointers for the extracted references. The remaining manual stays in the bundle.
+
+## Previous consolidation
+
 Status: the initial consolidation shipped in v0.11.0. The additional references
 for knowledge maintenance, assembly, planning and research are prepared source
 changes, not yet published. Consumer adoption is separate from either publication. The shared

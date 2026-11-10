@@ -27,7 +27,10 @@ class ReleaseTests(unittest.TestCase):
         for args in (("init", "-q"), ("config", "user.name", "Test"),
                      ("config", "user.email", "test@example.invalid")):
             release.git(*args)
-        for name in ("apm.yml", "packages/org-meta-bundle/apm.yml", "packages/frontend-react/apm.yml", "packages/fake-external-services/apm.yml", ".claude-plugin/marketplace.json"):
+        manifest = yaml.safe_load((ROOT / "apm.yml").read_text())
+        package_paths = [f"{entry['subdir']}/apm.yml" for entry in manifest["marketplace"]["packages"]]
+        self.package_count = len(package_paths)
+        for name in ["apm.yml", *package_paths, ".claude-plugin/marketplace.json"]:
             path = Path(name)
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text((ROOT / name).read_text())
@@ -63,15 +66,15 @@ class ReleaseTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             release.check(release_ready=True)
         release.sync("0.3.0")
-        self.assertEqual(len(json.loads(release.INDEX.read_text())["plugins"]), 4)
+        self.assertEqual(len(json.loads(release.INDEX.read_text())["plugins"]), self.package_count + 1)
         release.check(release_ready=True)
 
     def test_all_packages_release_in_lockstep(self):
         release.sync("0.3.0")
         root, packages = release.metadata()
-        self.assertEqual(len(packages), 3)
+        self.assertEqual(len(packages), self.package_count)
         self.assertTrue(all(p["version"] == "0.3.0" for p in packages))
-        self.assertEqual(len(json.loads(release.INDEX.read_text())["plugins"]), 3)
+        self.assertEqual(len(json.loads(release.INDEX.read_text())["plugins"]), self.package_count)
         release.check(release_ready=True)
         path = Path("packages/frontend-react/apm.yml")
         path.write_text(path.read_text().replace("0.3.0", "0.2.0"))

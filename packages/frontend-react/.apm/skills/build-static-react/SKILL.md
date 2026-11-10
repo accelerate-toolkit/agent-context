@@ -1,6 +1,6 @@
 ---
 name: build-static-react
-description: Use when designing, implementing, reviewing or testing a statically delivered React application with a small dependency surface. Covers browser state, API boundaries, accessibility, supply-chain review and static delivery; does not select React for unrelated projects.
+description: Use when designing, implementing, reviewing or testing a browser React application delivered as static HTML, JavaScript and CSS, including API integration, accessibility and static delivery. Applies when React and static delivery are selected; not for choosing a frontend framework, server-rendered React or backend implementation.
 ---
 
 # Build a static React application

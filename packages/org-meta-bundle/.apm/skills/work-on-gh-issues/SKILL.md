@@ -1,6 +1,6 @@
 ---
 name: work-on-gh-issues
-description: Use when discovering, selecting, or beginning work on GitHub issues raised against the current repository.
+description: Use when listing or triaging GitHub issues raised against the current checkout, or picking up and implementing an explicitly selected issue in that repository. For communication on behalf of this repository in another repository, use collaborate-cross-repos; not for generic GitHub searches or pull-request reviews.
 ---
 
 # Work on GitHub Issues

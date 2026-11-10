@@ -11,10 +11,10 @@ implementation, testing and delivery: **Context**, **Feedback loops** and
 **Trajectory**. Read the
 [shared SDLC explanation](packages/org-meta-bundle/.apm/context/software-development-lifecycle.context.md).
 The concise instruction applies to all files and links to this packaged reference;
-APM rewrites the link when compiling consumer instructions. The manual keeps
-requirements, delegation, evidence, specifications, contract publication and guidance
-adoption together in `org-meta-bundle`, with linked references for detailed work.
-We will iterate on those methods in this package before considering further splits.
+APM rewrites the link when compiling consumer instructions. The SDLC principles and guidance adoption remain in `org-meta-bundle`. The
+separately selectable `work-with-requirements` package maintains requirements,
+delegation, verification planning, evidence assessment and specification changes
+through six skills sharing one detailed model.
 See [consolidation and migration](docs/sdlc-consolidation.md) for the adoption boundary.
 
 Projects retain their own requirements, acceptance journeys and delivery decisions.
@@ -213,6 +213,7 @@ you to run `make apm-install`. The reminder performs no upstream check or update
 - `packages/` contains separately selectable APM packages released in lockstep.
 - `packages/frontend-react/` provides optional static React guidance and pinned official references; see its [adoption notes](packages/frontend-react/README.md).
 - `packages/fake-external-services/` provides optional service-fake guidance; see its [adoption notes](packages/fake-external-services/README.md).
+- `packages/work-with-requirements/` provides requirements workflows and visualisation guidance; see its [adoption notes](packages/work-with-requirements/README.md).
 - `packages/org-meta-bundle/` provides the organization-wide Codex workflows.
 - `.agent-cache/` is generated local documentation state.
 

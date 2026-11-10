@@ -121,8 +121,10 @@ requirements and contract revisions, preserving limitations and historical resul
 
 ## Shared manual and local application
 
-The SDLC manual lives together in `org-meta-bundle`. Read the relevant reference
-when doing the corresponding work:
+The SDLC principles remain in `org-meta-bundle`. Detailed requirements methods
+live in the separately selectable `work-with-requirements` package; the first
+three links below retain adoption pointers for existing readers. Read the relevant
+installed skill and reference when doing the corresponding work:
 
 - [Requirements, delegation and evidence](requirements.context.md): authoring,
   ownership, registers, identity, assignments and satisfaction assessments.

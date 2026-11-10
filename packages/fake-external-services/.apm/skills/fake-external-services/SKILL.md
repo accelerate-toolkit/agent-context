@@ -1,6 +1,6 @@
 ---
 name: fake-external-services
-description: Design, implement, or review external service fakes in a component test harness, including protocol fidelity, state, fault injection, human control UIs, live inspectors, and checks against the real dependency. Use for service-boundary testing, not ordinary in-process unit mocks.
+description: Use when designing, implementing or reviewing a fake external service for development or component tests that exercise the real client and service protocol. Covers controllable state, failures, inspection and contract fidelity; not ordinary in-process unit mocks or changes to a live service.
 ---
 
 # Fake external services

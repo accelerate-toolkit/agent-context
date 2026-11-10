@@ -1,6 +1,6 @@
 ---
 name: use-apm
-description: Use when authoring, installing, validating, or publishing APM packages in a Codex workspace.
+description: Use when creating or changing Agent Package Manager (APM) packages, manifests or dependencies, installing or refreshing packaged skills, compiling agent instructions, or validating and preparing marketplace publication. Not for application performance monitoring or ordinary application dependency management.
 ---
 
 # Use APM

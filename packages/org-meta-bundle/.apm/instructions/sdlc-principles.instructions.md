@@ -31,8 +31,10 @@ Before SDLC planning or recommendations, read the
 for the maintained explanation. Establish how the consuming project applies these
 principles using its own requirements, acceptance journeys and delivery context.
 
-Use the linked manual references for requirement decomposition and evidence,
-specification/contract changes, publication handoffs and guidance adoption.
+Use the separately installed `work-with-requirements` skills for detailed
+requirement definition, decomposition, verification planning, evidence assessment,
+specification changes and visualisation. The linked manual retains adoption
+pointers and guidance adoption methods. Planned coverage is not actual evidence.
 Each responsibility layer owns derived requirements within its commission;
 changes to commissioned obligations return to their definition authority.
 Keep initiative-specific parties, assignments, decisions and evidence in local context.

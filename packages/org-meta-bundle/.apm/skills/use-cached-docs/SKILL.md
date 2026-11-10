@@ -1,6 +1,6 @@
 ---
 name: use-cached-docs
-description: Use when refreshing cached external documentation, adding cached-docs.yml to an installed skill, or reading locally hydrated tool docs.
+description: Use when finding or reading external tool documentation in the local .agent-cache/tool-docs cache, declaring sources in cached-docs.yml, or previewing, refreshing and verifying hydrated documentation. Not for general web research, application caches or changing the documented tool itself.
 ---
 
 # Use Cached Docs

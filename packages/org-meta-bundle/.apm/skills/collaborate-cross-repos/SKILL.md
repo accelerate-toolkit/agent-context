@@ -1,6 +1,6 @@
 ---
 name: collaborate-cross-repos
-description: Use when creating GitHub issues or replying to GitHub issue or pull-request comments on behalf of one repository in another repository.
+description: Use when drafting or posting a GitHub issue, issue comment or pull-request comment in another repository on behalf of the current or explicitly represented repository. Covers cross-repository identity and message conventions; not read-only research, same-repository discussion or picking up local issue work.
 ---
 
 # Collaborate Across Repositories
