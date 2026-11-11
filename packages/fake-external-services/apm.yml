@@ -1,5 +1,5 @@
 name: fake-external-services
-version: 0.15.1
+version: 0.15.2
 description: Contract-faithful external service fakes for component test harnesses.
 author: accelerate-toolkit
 license: MIT
