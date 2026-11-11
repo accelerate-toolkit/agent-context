@@ -1,0 +1,41 @@
+{
+  "source_id": "aws-cognito",
+  "strategy": "http-files",
+  "retrieval_started": "2026-11-11T23:21:56.139243+00:00",
+  "pdf_extractor": {
+    "name": "pypdf",
+    "version": "7.0.1",
+    "mode": "layout"
+  },
+  "files": [
+    {
+      "resolved_url": "https://docs.aws.amazon.com/pdfs/cognito/latest/developerguide/cognito-dg.pdf",
+      "headers": {
+        "ETag": "\"fbbf5ef8cb3353be773958939cbb78d6\"",
+        "Last-Modified": "Wed, 11 Nov 2026 22:31:14 GMT",
+        "Content-Type": "application/pdf"
+      },
+      "url": "https://docs.aws.amazon.com/pdfs/cognito/latest/developerguide/cognito-dg.pdf",
+      "destination": "developer-guide.pdf",
+      "retrieved_at": "2026-11-11T23:21:57.988602+00:00",
+      "sha256": "96999bacbce0c4fbc4294304c7a15424a399b3aa6b0be42dca6f087a93719770",
+      "text_destination": "developer-guide.txt",
+      "text_sha256": "d9ae36be1df40fb09dfa1946023b28a855a679f01f4308ab55fb7f9fe3a051dd"
+    },
+    {
+      "resolved_url": "https://docs.aws.amazon.com/pdfs/cognito-user-identity-pools/latest/APIReference/cognito-user-identity-pools-apiref.pdf",
+      "headers": {
+        "ETag": "\"8fc2bacfd560860c3d70e54bd47317de\"",
+        "Last-Modified": "Wed, 11 Nov 2026 22:31:12 GMT",
+        "Content-Type": "application/pdf"
+      },
+      "url": "https://docs.aws.amazon.com/pdfs/cognito-user-identity-pools/latest/APIReference/cognito-user-identity-pools-apiref.pdf",
+      "destination": "user-pools-api.pdf",
+      "retrieved_at": "2026-11-11T23:22:29.130795+00:00",
+      "sha256": "d23e0b31515da9f87ec0b04f2cc610127407f5170d2a951a6133d5eaf4018715",
+      "text_destination": "user-pools-api.txt",
+      "text_sha256": "a8b70edb74b6c0fcf39eb4c94635e40b3733091caff74416c16977ad0d7bda90"
+    }
+  ],
+  "retrieval_completed": "2026-11-11T23:22:51.312848+00:00"
+}

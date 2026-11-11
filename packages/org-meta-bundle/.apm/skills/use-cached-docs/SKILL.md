@@ -88,9 +88,11 @@ cached_docs:
 
 `format` defaults to `text`; text/Markdown must be UTF-8 and cannot be an HTML
 error page. PDF files must have a PDF header. `text_destination` is optional and
-requires Poppler's `pdftotext`; missing tools or failed/empty extraction fail the
-refresh. File and derived-text destinations must be unique relative paths and
-must not overlap each other or generated metadata paths. No recursive crawling or
+uses `pypdf`, provisioned automatically by `uv run --script`; no PDF system tools
+are required. Failed or empty extraction fails the refresh. Only embedded text
+is extracted: scanned images are not OCRed, layout fidelity varies, and encrypted
+PDFs are unsupported. File and derived-text destinations must be unique relative
+paths and must not overlap each other or generated metadata paths. No recursive crawling or
 automatic execution of downloaded files occurs. Source licensing still applies.
 
 Select a source to avoid refreshing unrelated documentation:
@@ -117,6 +119,9 @@ transient download failures fail the run and can be retried by rerunning it.
 Each snapshot has a local `INDEX.md`, the input manifest, `provenance.json` and
 `SHA256SUMS`. Provenance records source/resolved URLs, retrieval times, available
 ETag/Last-Modified/Content-Type headers, content hashes and PDF extractor version.
+New snapshots record `pdf_extractor` with the library name, version and mode.
+Older snapshots retain their `pdftotext_version` provenance and remain verifiable
+with `--check`; refresh creates a new snapshot without rewriting history.
 Original bytes remain unchanged; extracted text is a derivative. This is a dated
 retrieval snapshot, not a pinned release or atomic upstream edition; hashes are
 local integrity evidence, not publisher signatures. Cite the concrete snapshot

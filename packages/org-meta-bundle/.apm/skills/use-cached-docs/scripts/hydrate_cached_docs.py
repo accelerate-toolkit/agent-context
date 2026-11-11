@@ -4,6 +4,7 @@
 # dependencies = [
 #   "certifi>=2025.0.0",
 #   "pyyaml>=6.0.2",
+#   "pypdf==7.0.1",
 # ]
 # ///
 """Hydrate documentation manifests owned by installed agent skills."""
@@ -12,7 +13,6 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import subprocess
 from datetime import datetime, timezone
 from uuid import uuid4
 import io
@@ -29,6 +29,7 @@ from urllib.parse import quote, urlsplit
 import urllib.request
 
 import certifi
+import pypdf
 import yaml
 
 
@@ -367,6 +368,9 @@ def download_http(url: str, destination: Path) -> dict:
     request = urllib.request.Request(https_url(url), headers={"User-Agent": USER_AGENT})
     with opener.open(request, timeout=60) as response, destination.open("wb") as output:
         shutil.copyfileobj(response, output)
+        expected = response.headers.get("Content-Length")
+        if expected is not None and output.tell() != int(expected):
+            raise ValueError(f"Incomplete download: {url}")
         return {"resolved_url": response.url,
                 "headers": {key: response.headers[key] for key in
                             ("ETag", "Last-Modified", "Content-Type") if key in response.headers}}
@@ -381,6 +385,17 @@ def file_hash(path: Path) -> str:
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
+def extract_pdf_text(source: Path, destination: Path) -> None:
+    """Extract embedded text without external tools; retain page boundaries."""
+    with pypdf.PdfReader(source, strict=True) as reader:
+        if reader.is_encrypted:
+            raise ValueError("Encrypted PDF text extraction is not supported")
+        text = "\n\f\n".join(page.extract_text(extraction_mode="layout") for page in reader.pages)
+    if not text.strip():
+        raise ValueError(f"Empty PDF text extract: {source.name}")
+    destination.write_text(text + "\n", encoding="utf-8")
+
+
 def hydrate_http(source: CachedDocsSource, cache_root: Path, dry_run: bool) -> None:
     parent = cache_root / "tool-docs" / source.identifier
     if dry_run:
@@ -388,13 +403,12 @@ def hydrate_http(source: CachedDocsSource, cache_root: Path, dry_run: bool) -> N
         return
     extractor = None
     if any(item.text_destination for item in source.http_files):
-        extractor = subprocess.run(["pdftotext", "-v"], check=True, capture_output=True,
-                                   text=True).stderr.strip()
+        extractor = {"name": "pypdf", "version": pypdf.__version__, "mode": "layout"}
     parent.mkdir(parents=True, exist_ok=True)
     name = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid4().hex[:12]
     destination = parent / name
     provenance = {"source_id": source.identifier, "strategy": "http-files",
-                  "retrieval_started": utc_now(), "pdftotext_version": extractor, "files": []}
+                  "retrieval_started": utc_now(), "pdf_extractor": extractor, "files": []}
     index = ["# Documentation snapshot", "",
              "Upstream HTTP sources are mutable; this is a retrieval snapshot, not a release.",
              "See provenance.json and SHA256SUMS. Text extracts are local derivatives.",
@@ -423,9 +437,7 @@ def hydrate_http(source: CachedDocsSource, cache_root: Path, dry_run: bool) -> N
             if item.text_destination:
                 text_path = stage / item.text_destination
                 text_path.parent.mkdir(parents=True, exist_ok=True)
-                subprocess.run(["pdftotext", "-layout", str(target), str(text_path)], check=True)
-                if not text_path.stat().st_size:
-                    raise ValueError(f"Empty PDF text extract: {item.url}")
+                extract_pdf_text(target, text_path)
                 metadata.update(text_destination=str(item.text_destination),
                                 text_sha256=file_hash(text_path))
                 index.append(f"  - [Searchable text]({quote(str(item.text_destination))})")

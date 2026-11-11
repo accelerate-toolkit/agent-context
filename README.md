@@ -249,3 +249,5 @@ installed by this workflow. Hydration uses the existing shared tool and download
 full upstream archives before selecting paths. The offline smoke check requires rg.
 
 See [hydration evidence](docs/frontend-hydration.md) for observed results and limits.
+
+PDF hydration validation: [self-contained extraction evidence](docs/evidence/pdf-hydration/README.md).
