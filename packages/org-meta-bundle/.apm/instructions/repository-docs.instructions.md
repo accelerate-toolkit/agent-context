@@ -15,7 +15,7 @@ below without duplicating their progress or assessment summaries:
 
 | Location under `docs/` | Purpose |
 | --- | --- |
-| `context/` | Purpose, users, journeys and constraints. |
+| `product/` | Purpose, users, intended outcomes, principles and roadmap. |
 | `requirements/` | Owned and received obligations, component allocation and planned verification coverage. |
 | `decisions/` | ADRs with stable indices plus topic names; rationale, assessed options and consequences. |
 | `design/` | Subject-named, maintained system designs and permanent technical information. |
@@ -24,6 +24,10 @@ below without duplicating their progress or assessment summaries:
 | `evidence/` | Observations, assessments, limitations and links to retained results. |
 | `runbooks/` | Hands-on procedures, prerequisites, verification and recovery. |
 | `workbench/` | Optional staging for future Cypherdown ingestion; no mandatory usage. |
+
+Where product is not the subject, choose a meaningful subject name rather than a
+generic catch-all. Keep responsibilities and architectural boundaries in design.
+Roadmaps link to plans and WIP; shared methods remain in the adopted guidance.
 
 Create folders only when needed. Until an actual ingestion/generation pipeline
 exists, maintain documents directly without labelling them generated. Link to

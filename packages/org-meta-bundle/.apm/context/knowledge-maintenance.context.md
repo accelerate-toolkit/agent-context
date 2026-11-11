@@ -5,6 +5,9 @@ material rather than creating competing definitions. Product context and compone
 implementation details can live in different repositories while remaining connected
 through explicit references. Actual repository roles belong in local context.
 
+Keep shared documentation and citation methods in this manual; consumer docs
+record local application and exceptions. Use `maintain-repo-docs` for placement.
+
 ## Move, distill and retire
 
 A move changes the authoritative location; inspect callers and update affected

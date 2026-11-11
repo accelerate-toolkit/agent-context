@@ -6,6 +6,9 @@ Keep the roadmap concise: outcome, value, requirement links, sequence and status
 Distinguish agreed scope from possible later work; ordering an outcome does not
 commit a delivery date or every detail of its implementation.
 
+Keep the roadmap with product or subject direction. Link to plans and active WIP
+for execution details and progress.
+
 ## Shape a milestone before execution
 
 Create a milestone plan when actively shaping the outcome. Record scope,

@@ -1,11 +1,14 @@
 # Document types and lifecycle
 
-## Context
+## Product direction
 
-Use enduring subject names such as `docs/context/product-purpose.md` and
-`users-and-journeys.md`. Explain purpose, users, intended outcomes and constraints.
-Keep context current; link precise obligations in requirements rather than defining
-a competing set. Technical structure belongs in design; choices belong in ADRs.
+Use `docs/product/` for purpose, users, intended outcomes, guiding principles and
+roadmap. Where product is not the subject, choose a name that describes the
+repository's purpose. Avoid generic catch-all categories such as `context/`.
+
+Keep precise obligations in requirements, responsibilities and architectural
+boundaries in design, and observations in evidence. Roadmaps link to plans and
+active WIP; execution details stay with that work.
 
 ## Requirements and allocation
 

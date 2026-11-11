@@ -14,12 +14,16 @@ repository-wide reorganisation, execution of a plan or acceptance of a decision.
 ## Placement and navigation
 
 Use `docs/README.md` as a concise navigation map, not a duplicate status register.
-The standard homes are `context/`, `requirements/`, `decisions/`, `design/`,
+The standard homes are `product/`, `requirements/`, `decisions/`, `design/`,
 `plans/`, `wip/`, `evidence/` and `runbooks/` under `docs/`. Create directories
 only when they hold useful content. Optional `docs/workbench/` stages material
 for future Cypherdown ingestion; do not require authors to use it. Until an actual
 ingestion/generation pipeline exists, maintain the other documents directly and
 do not label them generated. Preserve an existing real generated-source workflow.
+
+Use `product/` for product intent and direction. Where that subject does not fit,
+choose a meaningful subject name rather than a generic catch-all. Keep shared
+methods in the adopted guidance and local application in the repository.
 
 Keep tightly coupled tool/module documentation, executable tests, schemas and
 contracts in their established authoritative homes and link to them. Respect
