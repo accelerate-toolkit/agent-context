@@ -3,7 +3,7 @@ export PYTHONDONTWRITEBYTECODE := 1
 APM_VERSION ?= 0.30.0
 APM ?= uv tool run --from apm-cli==$(APM_VERSION) apm
 
-.PHONY: help apm-install apm-update apm-compile apm-test test release-test release-plan release-check
+.PHONY: help apm-install apm-update apm-compile test release-test release-plan release-check
 
 help: ## List available repository actions.
 	@awk 'BEGIN { FS = ":.*##" } /^[[:alnum:]_.-]+:.*##/ { printf "  %-20s %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
@@ -20,9 +20,6 @@ apm-update: ## Refresh APM dependencies, hydrate docs and compile instructions.
 
 apm-compile: ## Compile instructions without refreshing documentation.
 	$(APM) compile --target codex
-
-apm-test: ## Test APM setup ordering and failure behavior.
-	uv run --script scripts/test.py --pattern test_apm_setup.py
 
 release-plan: ## Preview the next version and write release notes under build/.
 	uv run --script scripts/release/release.py plan

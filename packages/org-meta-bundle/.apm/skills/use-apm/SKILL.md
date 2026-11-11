@@ -64,6 +64,10 @@ have completed. Keep `.agent-cache/` ignored. Documentation versions come from
 `cached-docs.yml`; `latest` resolves during hydration, independently of APM pins.
 Without the hydrator, omit the hydration target and calls.
 
+Validate setup by running the documented action and inspecting its result. Do not
+add automated tests for the APM Makefile or install/hydrate/compile workflow;
+consumer repositories do not need to test APM itself.
+
 Before initial setup or intentional manifest/local-source changes, preview with
 `apm install --target codex --dry-run`, then run `make apm-install`. For a workspace
 that does not yet expose Make targets, the basic installation commands are:

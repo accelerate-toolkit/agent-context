@@ -1,5 +1,9 @@
 # APM setup verification
 
+Historical results below record the original checks. The Make orchestration test
+suite and `apm-test` target were subsequently removed: setup needs a smoke check,
+not dedicated automated tests of Make or APM.
+
 Verified on 2026-11-11 for [issue #5](https://github.com/accelerate-toolkit/agent-context/issues/5),
 using APM CLI 0.30.0 and the local org-meta-bundle source at version 0.15.1.
 

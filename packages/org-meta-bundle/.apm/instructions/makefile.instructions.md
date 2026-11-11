@@ -28,3 +28,7 @@ actions that work without caller-supplied parameters.
 
 Do not assume a target exists: inspect the Makefile or run `make` before using
 one. Use the documented script interface when the operation needs parameters.
+
+Do not add automated tests for Make recipes or workflow orchestration that simply
+invoke existing tools. Review the commands and run the relevant action as a smoke
+check. Test substantive logic in the underlying scripts where appropriate.
