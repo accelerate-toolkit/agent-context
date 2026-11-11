@@ -58,7 +58,7 @@ methods. Its skills share one maintained model. Preserve the repository's
 lockstep release process; separate installation does not imply independent
 version streams.
 
-Consumers pin accepted releases and commit resolved lockfiles. Preserve source
+Consumers commit accepted release pins in `apm.yml` and ignore `apm.lock.yaml`. Preserve source
 artifact, owning package and version attribution in installed context and change
 summaries. Project names, authority mappings, requirements, decisions and evidence
 remain in the consuming repositories.

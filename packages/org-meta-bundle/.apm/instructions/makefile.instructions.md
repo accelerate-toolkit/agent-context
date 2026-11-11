@@ -14,8 +14,12 @@ actions that work without caller-supplied parameters.
   documented Make target.
 - The default `make` target MUST list the available targets and their concise
   descriptions.
-- Use descriptive action names, declare action targets `.PHONY`, and keep
-  recipes short. Delegate substantial logic to scripts.
+- Name scoped targets `<area>[-<subject>]-<action>` using lowercase words and
+  hyphens, for example `apm-install`, `apm-compile` and `apm-docs-hydrate`.
+  Include the subject when it clarifies what the action affects. Keep familiar
+  repository-wide names such as `help`, `test` and `build`.
+- Declare action targets `.PHONY` and keep recipes short. Delegate substantial
+  logic to scripts.
 - A target may call a script with fixed arguments that define a useful project
   action, such as checking the project's documentation directory.
 - For operations requiring caller-supplied inputs or options, document the

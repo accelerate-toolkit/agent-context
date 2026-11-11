@@ -60,7 +60,7 @@ lockstep release; historical v0.6.0 does not contain it. Remote version validati
 and consumer installation must follow publication of a real new tag. No release,
 Hub/Auth dependency update or deployment was performed.
 
-Restart a consuming agent session after adopting the released package. Keep source
-and generated lockfile changes together; generated skills and documentation caches
+Restart a consuming agent session after adopting the released package. Commit
+source and manifest pins; generated lockfiles, skills and documentation caches
 remain ignored. The new package contains reusable guidance and official-source
 references, with no private consumer data or deployment configuration.

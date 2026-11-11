@@ -41,7 +41,7 @@ history and queries GitHub for incomplete publication. It then:
    planning newer work; otherwise computes the highest required version bump.
 2. Synchronizes root/package/marketplace versions and regenerates the tracked
    marketplace index, then validates tests, metadata, APM installation and compilation.
-3. Commits the manifests, marketplace index, and refreshed local-package lockfile
+3. Commits the manifests and marketplace index
    as `chore(release): vX.Y.Z`, with an explanatory body, and pushes to `main`.
 4. Tags that exact commit and creates a draft GitHub release with commit-derived
    notes, including bodies and issue references, before publishing it.
@@ -109,17 +109,16 @@ Keep these configuration repositories independent of APM and agent-context: they
 must not install this bundle or require APM to validate their presets. APM grouping
 rules are configuration, not a package dependency.
 
-For APM consumers, use a Renovate version with APM manager support and provide the
-APM CLI inside its execution environment so manifest and lockfile updates land
-together. Pin consuming repos to a published tag, for example
+For APM consumers, use a Renovate version with APM manager support to update manifest
+pins. Keep generated `apm.lock.yaml` files ignored. Pin consuming repos to a
+published tag, for example
 `accelerate-toolkit/agent-context/packages/org-meta-bundle#v0.3.1`; choose the released
 version containing the guidance you need. Untagged dependencies are skipped by
 Renovate. Local `path:` packages keep their repository lifecycle.
 
 As part of each organization's clone onboarding, integrate advisory `post-merge`
 and `post-rewrite` (rebase only) checks without replacing existing hooks. Compare
-the trees before and after the operation for changes to `apm.yml` or
-`apm.lock.yaml`, including addition or deletion. Rebase handling must retain the
+the trees before and after the operation for changes to `apm.yml`, including addition or deletion. Rebase handling must retain the
 pre-rebase tip and compare it with the completed result, not compare only the
 last replayed commit. Implementations should test fast-forward and merge pulls,
 rebases, unchanged dependency files, and coexistence with existing hooks.

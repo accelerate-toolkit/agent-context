@@ -11,7 +11,7 @@ The package was introduced in v0.10.0. The development-fake blueprint is a new
 addition and is not available in that original release. After its publication,
 install `accelerate-toolkit/agent-context/packages/fake-external-services` pinned
 to an actual release containing the blueprint. Preview installation, review the
-manifest and lockfile together, install and compile, then restart the agent session.
+manifest pins, install and compile, then restart the agent session.
 Do not use an unpublished tag or a sibling checkout as a consumer dependency.
 
 Maintainers develop it through the root local devDependency. Existing bundle

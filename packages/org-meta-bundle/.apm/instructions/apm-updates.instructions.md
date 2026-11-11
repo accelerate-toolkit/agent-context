@@ -33,8 +33,7 @@ even when the shared preset and APM packages are public.
 
 Keep Renovate configuration repositories independent of APM: no APM manifests,
 lockfiles, installed skills, or APM bootstrap steps. A preset may describe APM
-update rules without depending on APM. Tooling needed to refresh consumer
-lockfiles belongs in the consumer update runner.
+update rules without depending on APM. Consumer APM setup belongs in consumer repositories.
 
 ## Public repository portability
 
@@ -58,17 +57,17 @@ workflows, hooks and GitHub settings; preserve working integrations.
 1. Add repository-specific `.apm/instructions/` and an `apm.yml` targeting the
    supported agent, with the published organization package pinned to a real
    release. Do not invent a tag or use a sibling-checkout path for shared skills.
-   Preview installation, resolve the first lock, then compile instructions. Commit
-   the manifest, lock and compiled instructions; ignore downloaded packages, tool
+   Preview installation, install, then compile instructions. Commit the manifest
+   and compiled instructions; ignore `apm.lock.yaml`, downloaded packages, tool
    caches and generated deployments. Do not introduce ontologies unless requested.
 2. Expose setup/install, deliberate update, compilation and relevant local checks
-   through documented Make targets. Normal setup uses the frozen lock; dependency
+   through documented Make targets. Normal setup installs declared version pins; dependency
    updates are a separate reviewed operation. Install the advisory hooks described
    below without replacing existing hooks. Keep private deployment config, state,
    credentials and test artifacts ignored, with fictional public examples.
 3. Extend the existing organization/shared Renovate preset. Configure a working
    runner or verify an existing GitHub App/shared runner; a preset alone is not
-   execution. Pin runner tools, provide APM for lock regeneration, and include
+   execution. Pin runner tools and include
    managers for all relevant dependency inputs. Check extraction, especially when
    inherited ignore rules exclude examples that are executable test deployments.
 4. Apply the agreed automerge/check policy explicitly. Automerge may include major
@@ -94,21 +93,21 @@ version or claim that editing this checkout updated all consumers.
 ## APM dependencies
 
 Pin remote APM packages to explicit release versions, for example
-`owner/repository/packages/package-name#v1.2.3`. Commit `apm.yml` and
-`apm.lock.yaml` together. Repository-local `path:` dependencies remain versioned
-with their owning repository.
+`owner/repository/packages/package-name#v1.2.3`. Commit `apm.yml`; keep
+`apm.lock.yaml` as ignored local installation state. Direct pins do not freeze
+transitive dependencies unless those are also pinned. Repository-local `path:`
+dependencies remain versioned with their owning repository.
 
-Use a Renovate version with APM manager support to update version pins and the
-lockfile together. Its execution environment needs the APM CLI available to
-regenerate the lockfile. Unversioned dependencies are skipped. This package
+Use a Renovate version with APM manager support to update version pins in
+`apm.yml`. Unversioned dependencies are skipped. This package
 provides adoption guidance; it does not install Renovate configuration or hooks.
 
 During onboarding, integrate an advisory local check with the repository's
 existing Git hooks without replacing them. After a successful merge (including
-a fast-forward pull), or a rebase, detect whether `apm.yml` or `apm.lock.yaml`
+a fast-forward pull), or a rebase, detect whether `apm.yml`
 changed across the operation. For rebase hooks, ignore amend events and compare
 the pre-operation and resulting trees rather than only the last replayed commit.
-When either file changed, print:
+When the manifest changed, print:
 
 ```text
 APM dependencies changed.
@@ -122,5 +121,6 @@ clone and must be included in that organization's onboarding workflow.
 
 `make apm-install` installs the accepted dependency versions and recompiles
 instructions. `make apm-update` deliberately resolves newer dependencies and
-recompiles; review its lockfile changes. Restart the agent session after refreshing
+recompiles within declared refs. To adopt a new release, review and change its
+pin in `apm.yml`. Restart the agent session after refreshing
 its skills and instructions.

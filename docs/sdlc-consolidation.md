@@ -77,7 +77,7 @@ Before adopting a published release containing this change:
    after the replacement is available locally. Keep local boundary mappings and
    specific acceptance criteria. Preserve existing documentation anchors used by
    local records when reducing their method text.
-4. Pin the actual immutable release, preview installation, review the lockfile,
+4. Pin the actual immutable release, preview installation, review the manifest pin,
    install and compile. Check installed reference links and repository checks.
    Restart agent sessions after refreshing context.
 5. Record unresolved migration work and notify affected parties within the caller's

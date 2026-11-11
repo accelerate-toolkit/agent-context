@@ -63,6 +63,7 @@ organization workflows.
 
    This writes skills to `.agents/skills/`, compiles package instructions into
    `AGENTS.md`, and records the dependency in `apm.yml` and `apm.lock.yaml`.
+   Commit the manifest pin and ignore the generated `apm.lock.yaml`.
    No marketplace registration or manual manifest editing is required.
 
 4. Reload the Codex agent or start a new Codex session in the workspace. Codex
@@ -73,7 +74,7 @@ organization workflows.
 
 For a new GitHub repository, follow the complete
 [APM and Renovate onboarding checklist](packages/org-meta-bundle/.apm/instructions/apm-updates.instructions.md#new-github-repository-checklist).
-It covers local setup, frozen locks, advisory hooks, runner credentials and
+It covers local setup, manifest pins, advisory hooks, runner credentials and
 verification of an actual update PR/merge. Prepared files alone are not live onboarding.
 
 Inspect existing Renovate configuration and runner setup. Projects should extend
@@ -93,9 +94,9 @@ run; use a published tag when a versioned rollout is needed.
 
 A preset does not run Renovate. The organization must onboard the project into a
 runner with suitable repository access and verify an update PR. APM consumers
-also need the APM CLI in that runner to refresh `apm.lock.yaml` alongside version
-pins. Renovate config repositories themselves remain independent of APM: no APM
-manifest, installation, or dependency on agent-context.
+use manifest pins and keep generated lockfiles ignored. Renovate config
+repositories themselves remain independent of APM: no APM manifest, installation,
+or dependency on agent-context.
 
 See [organization rollout](docs/releases.md#organization-rollout) for runner
 responsibilities and the local post-pull reminder. Installing this bundle does
@@ -204,8 +205,8 @@ rules, preview commands, recovery, and repository setup requirements. The shared
 bundle carries release and APM update guidance. Each organization owns its
 Renovate configuration and consumer hook installation.
 
-Renovate updates pinned APM versions and their lockfile together. When a pull
-brings changes to either dependency file, local merge/rebase hooks should remind
+Renovate updates pinned APM versions in `apm.yml`. When a pull
+brings changes to the manifest, local merge/rebase hooks should remind
 you to run `make apm-install`. The reminder performs no upstream check or update.
 
 ## Structure

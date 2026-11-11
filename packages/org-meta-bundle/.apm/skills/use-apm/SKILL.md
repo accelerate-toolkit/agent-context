@@ -10,7 +10,7 @@ description: Use when creating or changing Agent Package Manager (APM) packages,
 Check `apm --version` and search `.agent-cache/tool-docs/apm/<tag>/` before
 using the network. This skill's `cached-docs.yml` caches the upstream README
 and docs. Use the installed `use-cached-docs` skill to hydrate missing or stale
-docs; when configured, run `apm run hydrate-cached-docs` from the workspace root.
+docs; prefer the repository's documented hydration Make target from the workspace root.
 `version: latest` is resolved only when the hydrator runs, not on every read.
 Compare the cached tag with the installed CLI version before using new flags.
 
@@ -29,8 +29,44 @@ Within the cache, start at `docs/src/content/docs/`:
 
 ## Codex Workflow
 
-Prefer the repository's documented Make actions. For initial setup or intentional
-manifest/local-source changes, preview and install, then compile instructions:
+Run `make` first and prefer the repository's documented setup targets. When
+adding APM setup, follow the shared Makefile guidance: list targets in the default
+help output, use `.PHONY`, and preserve existing integrations. Name targets
+`<area>[-<subject>]-<action>`: `apm-docs-hydrate` downloads documentation declared
+by installed APM skills.
+
+Where `use-cached-docs` is installed, expose installation → hydration → compilation
+as one setup action, with hydration and compilation also callable independently:
+
+```make
+.PHONY: apm-install apm-update apm-docs-hydrate apm-compile
+
+apm-install: ## Install pinned APM dependencies, hydrate docs and compile instructions.
+	apm install --target codex
+	$(MAKE) apm-docs-hydrate
+	$(MAKE) apm-compile
+
+apm-update: ## Refresh APM dependencies within declared refs, hydrate docs and compile.
+	apm install --update --target codex
+	$(MAKE) apm-docs-hydrate
+	$(MAKE) apm-compile
+
+apm-docs-hydrate: ## Download documentation declared by installed skills.
+	uv run --script .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py
+
+apm-compile: ## Compile Codex instructions without refreshing documentation.
+	apm compile --target codex
+```
+
+Keep the ordered steps in recipes, not parallel prerequisites. Hydration requires
+`uv` and network access; a failure stops compilation, but installation may already
+have completed. Keep `.agent-cache/` ignored. Documentation versions come from
+`cached-docs.yml`; `latest` resolves during hydration, independently of APM pins.
+Without the hydrator, omit the hydration target and calls.
+
+Before initial setup or intentional manifest/local-source changes, preview with
+`apm install --target codex --dry-run`, then run `make apm-install`. For a workspace
+that does not yet expose Make targets, the basic installation commands are:
 
 ```sh
 apm install --target codex --dry-run
@@ -41,12 +77,12 @@ apm compile --target codex
 A dry run can report an incomplete dependency preview when remote metadata is
 unavailable; it is not proof that the live install will succeed.
 
-For routine setup with an accepted lockfile, use `apm install --frozen --target codex`,
-then compile. Frozen installation rejects manifest or local-source drift instead
-of updating the lock. After intentional changes, use a normal install to record
-the new state and review `apm.lock.yaml`. Use `apm install --update --target codex`
-only for deliberate dependency updates; it resolves within declared refs and
-does not advance an explicit release pin to a different release.
+For routine setup, use `apm install --target codex`, then compile. Commit explicit
+release pins in `apm.yml`; ignore the generated `apm.lock.yaml`. Do not require
+`--frozen` or commit lockfile refreshes. Direct pins do not freeze unpinned
+transitive dependencies. Use `apm install --update --target codex` only for
+deliberate refreshes within declared refs; adopting another release requires
+changing its manifest pin.
 
 Codex receives skills under `.agents/skills/` and agents as
 `.codex/agents/<name>.toml`. Installation does not compile Codex instructions:
