@@ -77,10 +77,10 @@ apm compile --target codex
 A dry run can report an incomplete dependency preview when remote metadata is
 unavailable; it is not proof that the live install will succeed.
 
-For routine setup, use `apm install --target codex`, then compile. Commit explicit
+For routine setup, run `make apm-install`. Commit explicit
 release pins in `apm.yml`; ignore the generated `apm.lock.yaml`. Do not require
 `--frozen` or commit lockfile refreshes. Direct pins do not freeze unpinned
-transitive dependencies. Use `apm install --update --target codex` only for
+transitive dependencies. Use `make apm-update` only for
 deliberate refreshes within declared refs; adopting another release requires
 changing its manifest pin.
 
@@ -169,14 +169,8 @@ Use `devDependencies.apm` only for maintainer-only content, such as test
 fixtures, debug agents, and release tooling. APM deploys both dependency groups
 on a normal install, but excludes `devDependencies` from `apm pack` output.
 
-Each local package needs its own `apm.yml` and `.apm/` source tree. Install it
-from the workspace root after adding or changing a dependency:
-
-```sh
-apm install --target codex --dry-run
-apm install --target codex
-apm compile --target codex
-```
+Each local package needs its own `apm.yml` and `.apm/` source tree. Run `make apm-install`
+from the workspace root after adding or changing a dependency.
 
 A local package is versioned with the repository that owns it and should be
 promoted into this organization package repository only when it has a clear

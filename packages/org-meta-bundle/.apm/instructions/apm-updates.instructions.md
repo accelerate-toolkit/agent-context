@@ -57,11 +57,13 @@ workflows, hooks and GitHub settings; preserve working integrations.
 1. Add repository-specific `.apm/instructions/` and an `apm.yml` targeting the
    supported agent, with the published organization package pinned to a real
    release. Do not invent a tag or use a sibling-checkout path for shared skills.
-   Preview installation, install, then compile instructions. Commit the manifest
+   Preview installation, then run `make apm-install`. Commit the manifest
    and compiled instructions; ignore `apm.lock.yaml`, downloaded packages, tool
    caches and generated deployments. Do not introduce ontologies unless requested.
 2. Expose setup/install, deliberate update, compilation and relevant local checks
-   through documented Make targets. Normal setup installs declared version pins; dependency
+   through documented Make targets. Where `use-cached-docs` is installed, both
+   `apm-install` and `apm-update` run install → `apm-docs-hydrate` → `apm-compile`
+   sequentially; follow the `use-apm` example. Normal setup installs declared version pins; dependency
    updates are a separate reviewed operation. Install the advisory hooks described
    below without replacing existing hooks. Keep private deployment config, state,
    credentials and test artifacts ignored, with fictional public examples.
@@ -119,8 +121,8 @@ files, or fail the Git operation. Unchanged pulls stay quiet. No persistent
 reminder state or shell wrapper is required. Hook installation is local to each
 clone and must be included in that organization's onboarding workflow.
 
-`make apm-install` installs the accepted dependency versions and recompiles
-instructions. `make apm-update` deliberately resolves newer dependencies and
-recompiles within declared refs. To adopt a new release, review and change its
+`make apm-install` installs the accepted dependency versions, hydrates declared
+docs where supported, and compiles instructions. `make apm-update` runs the same
+sequence with a deliberate dependency refresh within declared refs. To adopt a new release, review and change its
 pin in `apm.yml`. Restart the agent session after refreshing
 its skills and instructions.

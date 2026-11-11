@@ -132,25 +132,12 @@ uv run --script scripts/check_docs.py --root other-docs
 Prefer an existing Make target when it matches the intended action; otherwise,
 use the documented script interface. Include these standard APM targets:
 
-```make
-.DEFAULT_GOAL := help
-
-.PHONY: help apm-install apm-update
-
-help: ## List available repository actions.
-	@awk 'BEGIN { FS = ":.*##" } /^[[:alnum:]_.-]+:.*##/ { printf "  %-20s %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
-
-apm-install: ## Install APM dependencies and compile Codex instructions.
-	apm install --target codex
-	apm compile --target codex
-
-apm-update: ## Update APM dependencies and compile Codex instructions.
-	apm install --update --target codex
-	apm compile --target codex
-```
-
-To review the planned files before writing them, add `--dry-run` to the install
-command.
+Use `apm-install` and `apm-update` for sequential installation, documentation
+hydration and compilation. Expose `apm-docs-hydrate` and `apm-compile` separately.
+See the [shared setup example](packages/org-meta-bundle/.apm/skills/use-apm/SKILL.md#codex-workflow).
+Hydration requires `uv` and network access; failure stops compilation, although
+installation may already have completed. Documentation versions follow
+`cached-docs.yml` independently of APM pins. Keep generated caches ignored.
 
 ## Scripting Convention
 
@@ -231,11 +218,12 @@ This repository installs `org-meta-bundle` from its local package path. Run:
 ```sh
 make
 make apm-install
-apm run hydrate-cached-docs
 ```
 
-Use `make apm-update` to refresh APM dependencies before recompiling the
-Codex instructions. `make` lists the supported repository actions.
+Use `make apm-update` to refresh dependencies, hydrate docs and compile
+instructions. `make apm-compile` compiles without a network refresh. `make` lists the supported repository actions.
+
+See [setup verification](docs/evidence/apm-setup/README.md) for checks and limits.
 
 After a release tag exists remotely, preview and build APM marketplace artifacts
 from the repository root (the release workflow validates local metadata before
@@ -254,7 +242,7 @@ The scripts and guidance in this repository are available under the
 ## Frontend documentation trial
 
 For the optional frontend package, run `make apm-install-dry-run`, then
-`make apm-install`, `make docs-hydrate-preview`, `make docs-hydrate` and
+`make apm-docs-hydrate-preview`, `make apm-install` and
 `make frontend-docs-verify`. The root maintainer install includes all local
 packages; consumers opt into frontend-react separately. No npm packages are
 installed by this workflow. Hydration uses the existing shared tool and downloads

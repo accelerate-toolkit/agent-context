@@ -14,23 +14,20 @@ description: Use when finding or reading external tool documentation in the loca
 
 ## Commands
 
-Preview the releases that would be hydrated:
+Run `make` to discover repository actions. Prefer `make apm-install` for setup
+and `make apm-docs-hydrate` to refresh documentation independently. The
+`use-apm` skill defines the ordered install → hydrate → compile workflow.
+
+For selected sources or repositories without Make targets, use the installed
+script directly. Hydration requires `uv` and network access:
 
 ```sh
-uv run .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py --dry-run
+uv run --script .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py --dry-run
+uv run --script .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py
 ```
 
-Hydrate all manifests discovered beside installed skills:
-
-```sh
-uv run .agents/skills/use-cached-docs/scripts/hydrate_cached_docs.py
-```
-
-When the consumer defines an APM script, prefer:
-
-```sh
-apm run hydrate-cached-docs
-```
+Documentation versions follow `cached-docs.yml`, independently of APM package
+pins; `latest` resolves on each hydration. Keep `.agent-cache/` ignored.
 
 ## Manifest Format
 
