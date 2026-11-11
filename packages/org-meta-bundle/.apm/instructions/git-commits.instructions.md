@@ -5,51 +5,40 @@ applyTo: "**"
 
 # Git Commit Messages
 
-Every Git commit created in this repository MUST use a Conventional Commits
-subject:
+Use Conventional Commits to drive Semantic Versioning: `feat` advances minor,
+`fix` or `perf` advances patch, and incompatible changes use `!` and a
+`BREAKING CHANGE:` footer to advance major. Follow the shared release policy,
+including its `0.x` rule. Classify by consumer impact: shipped skills and
+instructions are functionality; `docs` is for explanatory documentation.
+
+Every message needs a concise subject and a body explaining what changed and why.
+Use this template, omitting optional parts that do not apply:
 
 ```text
 <type>(<optional scope>)[optional !]: <description>
+
+<What changed and why.>
+
+Fixes #<completed issue>
+Refs #<related or partially addressed issue>
+BREAKING CHANGE: <incompatibility and required consumer action>
 ```
 
-Use `feat` for new functionality, `fix` for corrections, and `perf` for
-performance improvements. Mark incompatible changes with `!` before the colon
-and explain the migration in a `BREAKING CHANGE:` footer. Follow the shared
-release policy when classifying consumer-facing changes.
+Close each issue fully resolved by the commit with `Fixes #<number>` in the
+footer. Use `Refs` only for related or partial work, and state what remains for
+partial work. For another repository, use `owner/repository#<number>`. Closing
+keywords take effect when the commit reaches the default branch.
 
-Every commit message MUST include a body, separated from the subject by a blank
-line. Summarise what changed and why, with enough context for someone reading
-Git history without the original conversation. Keep detail proportional to the
-change; a short paragraph is sufficient for simple changes.
+Append `[no ci]` to the subject for documentation-only or administrative changes
+that do not affect shipped behavior, tests, dependencies, builds, workflows or
+releases. Shipped skills and instructions count as behavior, regardless of file
+extension. For mixed changes or uncertainty, run CI. Check the repository's
+workflows first: the marker skips GitHub `push` and `pull_request` workflows,
+including releases, and can leave required checks pending. Do not skip required
+checks. See [GitHub's skip rules](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs).
 
-Put relevant GitHub issue references in a footer, separated from the body by a
-blank line. Use `Refs #123` for related issues and `Fixes #123` only when the
-commit fully resolves the issue. Use `owner/repository#123` for issues in
-another repository. Omit references when no relevant issue exists. Put issue
-references in the footer rather than the subject.
-
-Examples (issue numbers are illustrative):
-
-```text
-fix: correct test path
-
-Resolve fixture paths relative to the test file so the suite can run from
-any working directory.
-
-Fixes #123
-```
-
-```text
-chore(renovate): label dependency dashboard
-
-Apply the dependencies label to the dashboard so maintainers can find it
-alongside dependency update requests.
-
-Refs owner/repository#456
-```
-
-Before committing, verify that the commit subject conforms to this format. Do
-not create a commit with a plain-English subject that omits the commit type.
+Before suggesting or creating a commit, check its type, body, closing references
+and whether CI should run.
 
 After completing a coherent piece of work, suggest a suitable Conventional
 Commit message and wait for human review before creating the commit, unless a
@@ -68,6 +57,8 @@ fix: correct test path
 
 Resolve fixture paths relative to the test file so the suite can run from
 any working directory.
+
+Fixes #123
 ```
 
 --- end of message ---
