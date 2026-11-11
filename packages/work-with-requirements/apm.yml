@@ -1,5 +1,5 @@
 name: work-with-requirements
-version: 0.15.3
+version: 0.15.4
 description: Requirements definition, decomposition, allocation, verification planning, evidence assessment and visualisation.
 author: accelerate-toolkit
 license: MIT
