@@ -1,9 +1,14 @@
 .DEFAULT_GOAL := help
 export PYTHONDONTWRITEBYTECODE := 1
 APM_VERSION ?= 0.30.0
+RENOVATE_IMAGE := ghcr.io/renovatebot/renovate:44.151.0
 APM ?= uv tool run --from apm-cli==$(APM_VERSION) apm
 
 .PHONY: help apm-install apm-update apm-compile test release-test release-plan release-check
+
+.PHONY: renovate-check
+renovate-check: ## Validate dependency update configuration without bot credentials.
+	docker run --rm -v "$(CURDIR)/renovate.json:/config/renovate.json:ro" --entrypoint renovate-config-validator $(RENOVATE_IMAGE) --strict --no-global /config/renovate.json
 
 help: ## List available repository actions.
 	@awk 'BEGIN { FS = ":.*##" } /^[[:alnum:]_.-]+:.*##/ { printf "  %-20s %s\n", $$1, $$2 }' $(MAKEFILE_LIST)

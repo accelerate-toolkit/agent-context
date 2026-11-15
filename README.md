@@ -213,6 +213,16 @@ you to run `make apm-install`. The reminder performs no upstream check or update
 
 ## Maintain This Repository
 
+This repository's `renovate.json` extends the shared preset with automerge
+explicitly disabled. The dependency-update workflow runs weekly and can be
+dispatched manually; manual runs default to a non-writing preview. Configure a
+repository-scoped GitHub-only `RENOVATE_TOKEN` with access to contents, pull
+requests, issues and workflow updates before activation. Do not use deployment
+credentials. Run `make renovate-check` to validate configuration locally.
+The runner does not install APM: it updates manifest pins, while the ignored
+APM lockfile remains local installation state. After publication, verify a
+successful run and an actual update PR before treating onboarding as complete.
+
 This repository installs `org-meta-bundle` from its local package path. Run:
 
 ```sh

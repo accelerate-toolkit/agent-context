@@ -1,0 +1,50 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>accelerate-toolkit/renovate-config"
+  ],
+  "automerge": false,
+  "timezone": "Europe/London",
+  "schedule": [
+    "before 6am on monday"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^Makefile$/"
+      ],
+      "matchStrings": [
+        "APM_VERSION \\?= (?<currentValue>[^\\s]+)"
+      ],
+      "depNameTemplate": "apm-cli",
+      "datasourceTemplate": "pypi"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^Makefile$/"
+      ],
+      "matchStrings": [
+        "RENOVATE_IMAGE := (?<depName>[^\\s]+):(?<currentValue>[^\\s]+)"
+      ],
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^\\.github/workflows/.*\\.ya?ml$/"
+      ],
+      "matchStrings": [
+        "apm-cli==(?<currentValue>[0-9]+\\.[0-9]+\\.[0-9]+)"
+      ],
+      "depNameTemplate": "apm-cli",
+      "datasourceTemplate": "pypi"
+    }
+  ],
+  "pep723": {
+    "managerFilePatterns": [
+      "/\\.py$/"
+    ]
+  }
+}
