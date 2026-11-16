@@ -75,5 +75,23 @@ Document the consumed baseline, supported scenarios, material omissions and how
 to run the harness. Update the fake and fidelity checks when that baseline changes.
 If live verification is unavailable, report that gap rather than claiming parity.
 
-Passing against a fake supports component acceptance. It does not establish real
-interoperability or integrated product acceptance; those require their own evidence.
+## Learn from exploratory testing
+
+Use exploration against the real provider or client to refine the fake's behaviour.
+Record the observed baseline, exchanges, state transitions and limits. Decide
+whether a mismatch belongs in the fake, consumer implementation or agreed contract;
+do not make an observed product defect the expected result just to pass tests.
+Update the fake and a meaningful acceptance regression at the owning boundary.
+Initial client setup, discovery and authorization variants belong in controlled
+acceptance when the consumer depends on them, alongside later success and recovery.
+
+Broad acceptance should run without live dependencies. Component harnesses can
+fake neighbours; an assembled Product harness keeps internal components real and
+substitutes at its external boundary. Keep ownership explicit rather than creating
+a shared fake deliverable incidentally. Exploration feeds these automated checks;
+live deployment smoke remains a separate check of infrastructure and provider wiring.
+
+Passing against a fake supports acceptance at the exercised responsibility boundary.
+It does not establish live interoperability. Product acceptance requires evidence
+through real assembled components, with external substitutes and unverified client
+behaviour identified; component checks alone do not establish that combined outcome.

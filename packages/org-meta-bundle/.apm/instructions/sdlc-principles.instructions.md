@@ -31,6 +31,14 @@ Before SDLC planning or recommendations, read the
 for the maintained explanation. Establish how the consuming project applies these
 principles using its own requirements, acceptance journeys and delivery context.
 
+For test or delivery planning, also read
+[testing and continuous delivery](../context/testing-and-delivery.context.md).
+Deployable repositories own their infrastructure code. PR evidence covers local
+functional acceptance using `4dev` fakes and candidate deployment plus live-provider
+smoke. Exploration refines fake fidelity and automated regressions; it is not a
+routine manual promotion gate. Record adoption gaps rather than claiming existing
+pipelines implement this strategy.
+
 Use the separately installed `work-with-requirements` skills for detailed
 requirement definition, decomposition, verification planning, evidence assessment,
 specification changes and visualisation. The linked manual retains adoption

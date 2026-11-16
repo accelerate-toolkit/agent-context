@@ -22,6 +22,12 @@ They should document how the shared principles apply locally without maintaining
 a second copy of the shared guidance. Existing consumers adopt new guidance only
 after installing a published release containing it.
 
+[Testing and continuous delivery](packages/org-meta-bundle/.apm/context/testing-and-delivery.context.md)
+defines functional acceptance with `4dev` fakes, PR deployment and smoke evidence,
+and exploration that refines the fakes. Adoption requires a migration assessment
+where these checks and environment reservations do not yet exist; this source
+change is not evidence that consuming repositories have adopted it.
+
 ## Onboard a Codex Workspace
 
 Run these commands from the repository where you want Codex to use the

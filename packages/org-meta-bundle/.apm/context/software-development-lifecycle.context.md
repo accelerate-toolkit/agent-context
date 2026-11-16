@@ -138,6 +138,9 @@ installed skill and reference when doing the corresponding work:
   distillation, retirement, current navigation and historical citations.
 - [Component delivery and product assembly](assembly-and-deployment.context.md):
   artifact handoff, sandbox isolation, candidate assemblies and deployed state.
+- [Testing and continuous delivery](testing-and-delivery.context.md): local
+  acceptance with fakes, PR deployment evidence, live smoke, exploration and
+  environment reservations at every responsibility layer.
 - [Roadmaps and milestone plans](roadmaps-and-milestones.context.md): outcome-led
   sequencing, plan-to-WIP transitions and evidence-based progress updates.
 - [Research evidence and architecture decisions](research-and-decisions.context.md):

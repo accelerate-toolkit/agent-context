@@ -4,6 +4,8 @@ Apply the [responsibility model](software-development-lifecycle.context.md) to
 assembly as well as implementation. Identify the owning layer and its environment
 boundaries in local context before changing deployment workflows. This guidance
 does not authorize provisioning, teardown or migration of existing resources.
+Use [testing and continuous delivery](testing-and-delivery.context.md) to qualify
+both behaviour and infrastructure changes before merge.
 
 ## Deliver artifacts and deployment interfaces
 
@@ -33,8 +35,9 @@ invalidating retained product acceptance setup.
 
 The assembling layer maintains its integration environment with distinct runtime
 endpoints, identity clients, credentials, application state and deployment state
-where applicable. Integration, staging and preproduction can describe the same
-role; those names do not require three environments. Local constraints determine
+where applicable. Separate mutable candidate qualification from stable exploration
+and promotion. Local names may differ, but a stable exploration environment must
+not also receive unqualified PR candidates. Local constraints determine
 account, tenant, domain and state bindings; this method does not mandate a new
 cloud account or a particular provider.
 
