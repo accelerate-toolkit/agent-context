@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 export PYTHONDONTWRITEBYTECODE := 1
-APM_VERSION ?= 0.30.0
-RENOVATE_IMAGE := ghcr.io/renovatebot/renovate:44.151.0
+APM_VERSION ?= 0.35.1
+RENOVATE_IMAGE := ghcr.io/renovatebot/renovate:44.244.2
 APM ?= uv tool run --from apm-cli==$(APM_VERSION) apm
 
 .PHONY: help apm-install apm-update apm-compile test release-test release-plan release-check
