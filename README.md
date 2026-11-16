@@ -213,12 +213,16 @@ you to run `make apm-install`. The reminder performs no upstream check or update
 
 ## Maintain This Repository
 
-This repository's `renovate.json` extends the shared preset with automerge
-explicitly disabled. The dependency-update workflow runs weekly and can be
+This repository's `renovate.json` extends the shared preset with Renovate-managed
+squash automerge enabled and passing checks required. GitHub platform auto-merge
+is disabled. The dependency-update workflow still runs weekly and can be
 dispatched manually; manual runs default to a non-writing preview. Configure a
 repository-scoped GitHub-only `RENOVATE_TOKEN` with access to contents, pull
 requests, issues and workflow updates before activation. Do not use deployment
 credentials. Run `make renovate-check` to validate configuration locally.
+Until hosted-app migration, green PRs can wait for the next weekly run to merge.
+The agreed hosted behavior separates Monday update creation from subsequent
+merge runs; see the [dependency update design](https://github.com/accelerate-toolkit/renovate-config/blob/main/docs/design/dependency-updates.md).
 The runner does not install APM: it updates manifest pins, while the ignored
 APM lockfile remains local installation state. After publication, verify a
 successful run and an actual update PR before treating onboarding as complete.
