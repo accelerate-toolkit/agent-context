@@ -102,6 +102,10 @@ See [organization rollout](docs/releases.md#organization-rollout) for runner
 responsibilities and the local post-pull reminder. Installing this bundle does
 not install Renovate configuration or Git hooks.
 
+See [workflow efficiency instructions](packages/org-meta-bundle/.apm/instructions/github-workflows.instructions.md)
+for workflow-scoped agent review practices and [the workflow review](docs/evidence/economical-ci/README.md)
+for observed configuration and follow-up work.
+
 ## Makefile Convention
 
 Every repository should use its `Makefile` as the discoverable catalogue of
