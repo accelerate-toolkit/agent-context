@@ -46,3 +46,9 @@ pointers and guidance adoption methods. Planned coverage is not actual evidence.
 Each responsibility layer owns derived requirements within its commission;
 changes to commissioned obligations return to their definition authority.
 Keep initiative-specific parties, assignments, decisions and evidence in local context.
+
+Keep `4dev` fakes with the consumers: the component whose tests use a substitute
+owns its source, scenarios and fidelity checks in its own repository. Do not move
+a fake to the simulated service's repository. Shared contract authority and real
+provider conformance remain separate. Reusable fake packaging does not transfer
+ownership; the owning consumer publishes it when needed. Use lowercase fake names.

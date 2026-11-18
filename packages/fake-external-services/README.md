@@ -1,8 +1,9 @@
 # Fake external services
 
 Optional APM package supplying the [fake-external-services skill](.apm/skills/fake-external-services/SKILL.md).
-It guides component-owned service fakes, contract fidelity, state and fault controls,
-human control interfaces, live inspectors, and verification limits. It supplies guidance, not a fake server or a framework.
+It guides consumer-owned service fakes, contract fidelity, state and fault controls,
+human control interfaces, live inspectors, and verification limits. Fakes stay in
+the repository whose tests consume them, not with the simulated service. It supplies guidance, not a fake server or a framework.
 It has no dependency on org-meta-bundle and can be selected independently.
 
 ## Adoption

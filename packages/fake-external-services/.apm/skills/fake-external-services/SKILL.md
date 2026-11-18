@@ -6,12 +6,21 @@ description: Use when designing, implementing or reviewing a fake external servi
 # Fake external services
 
 Build the smallest fake that supports the component's acceptance scenarios at the
-real dependency boundary. Keep it in the consuming component's test harness,
-alongside its scenarios and fidelity checks, unless the project already has an
-explicit shared ownership model. A fake does not inherently need a separate
-published artifact or a prescribed framework. Derive entities, controls and views
-from the external service's consumed contract. No identity, messaging, storage or
-other domain model is implied by this skill.
+real dependency boundary. The consuming component owns the fake: keep its source,
+scenarios, controls and fidelity checks in that component's repository and harness.
+Do not put it in the repository of the service being simulated or infer ownership
+from its name. For example, an orders component consuming an inventory service
+owns `inventory4dev`; the inventory component owns fakes for its own dependencies.
+Use lowercase `4dev` names.
+
+Here consumer means the component whose tests use the substitute, including a fake
+client exercising its server. The wire direction does not reverse test ownership.
+Shared contracts remain with their definition authority; the real provider owns
+its implementation and conformance checks. A consumer-owned fake must follow that
+contract, not redefine it. Packaging a fake for another harness to reuse does not
+transfer ownership to the simulated provider or require a separate fake repository.
+A reusable artifact, when needed, is published by the owning consumer. No particular
+framework or identity, messaging, storage or other domain model is implied.
 
 ## Build a usable development fake
 

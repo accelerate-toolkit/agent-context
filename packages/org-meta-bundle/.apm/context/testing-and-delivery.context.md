@@ -77,8 +77,12 @@ guarantee. Retain provenance and known fidelity gaps; use separately selectable
 live comparisons where useful. Manual exploration improves automated protection
 and happens outside routine promotion. It does not replace live-provider smoke.
 
-Keep fakes in their consuming harness unless an explicit shared ownership model
-already exists. This strategy does not create shared fake deliverables. The
+Keep `4dev` fakes in the consuming component's repository and harness, alongside
+its scenarios and fidelity checks. The simulated service's repository does not own
+the fake. Consumer here means the component under test, including when the fake
+acts as its client. Shared contract authority and real-provider conformance remain
+separate. If reuse needs a published development artifact, its owning consumer
+publishes it; packaging does not move ownership. Use lowercase fake names. The
 optional `fake-external-services` skill provides implementation guidance.
 
 ## Separate candidate qualification from stable exploration

@@ -35,9 +35,11 @@ necessarily needs a browser-facing surface.
 
 ## Runtime and boundary shape
 
+Keep the fake source and its controls in the consuming component's repository.
+A separate process or reusable package does not change that ownership.
 Run the fake separately from the application under test. Keep its implementation
 out of production binaries and deployment modules. Give each service a distinct
-name and endpoint; `<service>4dev` is a useful naming convention, not a requirement.
+name and endpoint; use lowercase `<service>4dev` names.
 Print the relevant service endpoints and inspector URLs on startup. A separate dashboard or landing
 service is unnecessary when direct links suffice.
 
