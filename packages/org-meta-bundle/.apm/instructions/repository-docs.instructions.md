@@ -23,7 +23,7 @@ below without duplicating their progress or assessment summaries:
 | `wip/` | One folder per active implementation effort; README entry point, one or many documents. |
 | `evidence/` | Observations, assessments, limitations and links to retained results. |
 | `runbooks/` | Hands-on procedures, prerequisites, verification and recovery. |
-| `workbench/` | Optional staging for future Cypherdown ingestion; no mandatory usage. |
+| `workbench/` | Optional staging for future structured knowledge ingestion; no mandatory usage. |
 
 Where product is not the subject, choose a meaningful subject name rather than a
 generic catch-all. Keep responsibilities and architectural boundaries in design.

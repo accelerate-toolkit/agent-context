@@ -110,7 +110,7 @@ duplicating them. A tool/module README may remain the authoritative procedural h
 
 ## Optional workbench
 
-`docs/workbench/` stages documents for future Cypherdown ingestion. It is neither
+`docs/workbench/` stages documents for future structured knowledge ingestion. It is neither
 a mandatory authoring route nor an approval state. Staged material may be proposed
 or agreed; identify its status explicitly. Incorporating it into maintained docs
 must preserve meaning and provenance without implying ingestion or publication

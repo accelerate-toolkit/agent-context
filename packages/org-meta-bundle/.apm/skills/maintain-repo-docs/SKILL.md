@@ -17,7 +17,7 @@ Use `docs/README.md` as a concise navigation map, not a duplicate status registe
 The standard homes are `product/`, `requirements/`, `decisions/`, `design/`,
 `plans/`, `wip/`, `evidence/` and `runbooks/` under `docs/`. Create directories
 only when they hold useful content. Optional `docs/workbench/` stages material
-for future Cypherdown ingestion; do not require authors to use it. Until an actual
+for future structured knowledge ingestion; do not require authors to use it. Until an actual
 ingestion/generation pipeline exists, maintain the other documents directly and
 do not label them generated. Preserve an existing real generated-source workflow.
 
