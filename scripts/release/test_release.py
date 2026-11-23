@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["PyYAML==6.0.3"]
+# dependencies = ["PyYAML==6.0.4"]
 # ///
 """Release behaviour tests: isolated Git repositories and fake GitHub calls."""
 import json

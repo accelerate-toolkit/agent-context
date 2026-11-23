@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["PyYAML==6.0.3"]
+# dependencies = ["PyYAML==6.0.4"]
 # ///
 """Plan, prepare and publish lockstep APM releases. Only publish contacts GitHub."""
 from __future__ import annotations
