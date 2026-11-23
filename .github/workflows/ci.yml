@@ -12,11 +12,11 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: astral-sh/setup-uv@v10.3.3
+      - uses: astral-sh/setup-uv@v10.4.0
       - run: make test release-check
       - run: make renovate-check
       - name: Validate APM installation
         run: |
-          uv tool install apm-cli==0.35.1
+          uv tool install apm-cli==0.38.0
           apm install --target codex --dry-run
           make apm-install

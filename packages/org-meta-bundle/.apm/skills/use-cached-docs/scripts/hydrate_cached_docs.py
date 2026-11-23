@@ -4,7 +4,7 @@
 # dependencies = [
 #   "certifi>=2025.0.0",
 #   "pyyaml>=6.0.2",
-#   "pypdf==7.1.0",
+#   "pypdf==7.1.1",
 # ]
 # ///
 """Hydrate documentation manifests owned by installed agent skills."""
